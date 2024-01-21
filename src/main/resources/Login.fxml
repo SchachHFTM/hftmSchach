@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.LoginController">
+   <children>
+      <Button fx:id="toGameButton" layoutX="350.0" layoutY="374.0" onAction="#switchToGame"
+         prefHeight="26.0" prefWidth="120.0" text="New Game" AnchorPane.topAnchor="374.0" />
+      <ImageView fitHeight="201.0" fitWidth="200.0" layoutX="300.0" layoutY="100.0"
+         pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="80.0">
+         <image>
+            <Image url="@ChessLogo.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="loadFileButton" layoutX="350.0" layoutY="426.0" onAction="#loadGame"
+         prefHeight="26.0" prefWidth="120.0" text="Load a Game" AnchorPane.topAnchor="425.0" />
+   </children>
+</AnchorPane>
