@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -23,8 +24,19 @@ public class LoginController {
     private Button toGameButton;
 
     @FXML
+    private GridPane chessBoard;
+
+    @FXML
     private void switchToGame() throws IOException {
         App.setSceneRoot("Game");
+        //verzoegerung
+        try {
+            Thread.sleep(1000);
+            Board board = new Board(chessBoard);
+        } catch (InterruptedException e) {
+            // Ignore the exception
+        }
+
     }
 
     @FXML

@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 
 public class GameController {
 
@@ -16,7 +16,7 @@ public class GameController {
     }
 
     @FXML
-    private ColumnConstraints chessBoard;
+    private GridPane chessBoard;
 
     @FXML
     private Button editPlayer1;
