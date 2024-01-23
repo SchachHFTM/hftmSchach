@@ -11,12 +11,22 @@ import javafx.scene.layout.GridPane;
 public class GameController {
 
     @FXML
+    private GridPane board;
+
+    private Board cb;
+
+    @FXML
+    public void creatABoard(GridPane board) {
+        cb = new Board(board);
+    }
+
+    @FXML
     private void switchToPrimary() throws IOException {
         App.setSceneRoot("Login");
     }
 
     @FXML
-    private GridPane chessBoard;
+    private Button Start;
 
     @FXML
     private Button editPlayer1;

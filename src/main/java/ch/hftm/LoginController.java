@@ -29,13 +29,6 @@ public class LoginController {
     @FXML
     private void switchToGame() throws IOException {
         App.setSceneRoot("Game");
-        //verzoegerung
-        try {
-            Thread.sleep(1000);
-            Board board = new Board(chessBoard);
-        } catch (InterruptedException e) {
-            // Ignore the exception
-        }
 
     }
 

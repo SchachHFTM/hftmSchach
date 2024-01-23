@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static Scene scene;
+    LoginController loginController = new LoginController();
 
     public static void main(String[] args) {
         launch();
@@ -23,7 +24,6 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"), 800, 600);
-        LoginController loginController = new LoginController();
         loginController.setStage(stage);
         stage.setScene(scene);
         stage.show();
@@ -31,6 +31,10 @@ public class App extends Application {
 
     static void setSceneRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        /*  if (fxml.equals("Game")) {
+           GameController.creatABoard();
+        }*/
+
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
