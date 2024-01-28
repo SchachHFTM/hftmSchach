@@ -5,7 +5,7 @@ import javafx.scene.layout.StackPane;
 public class Square extends StackPane {
 
     int x, y;
-    boolean occupied;
+    public boolean occupied;
     String name;
 
     public Square(int x, int y) {
@@ -22,7 +22,7 @@ public class Square extends StackPane {
             status = "Occupied";
         else
             status = "Not occupied";
-        //        return "Square" + this.x + this.y + " - " + status;
+        // return "Square" + this.x + this.y + " - " + status;
         return "Square";
     }
 
