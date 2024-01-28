@@ -12,7 +12,7 @@ public class Square extends StackPane {
         this.x = x;
         this.y = y;
         this.occupied = false;
-        this.name = Coordinates.fromCoordinates(x, y).getNotation();
+        this.name = Coordinates.fromCoordinatesToNo(x, y).getNotation();
     }
 
     @Override
