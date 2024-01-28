@@ -38,7 +38,7 @@ public enum Coordinates {
         return String.valueOf(file) + rank;
     }
 
-    public static Coordinates fromCoordinates(int x, int y) {
+    public static Coordinates fromCoordinatesToNo(int x, int y) {
         for (Coordinates coordinate : values()) {
             if (coordinate.getX() == x && coordinate.getY() == y) {
                 return coordinate;
@@ -52,6 +52,33 @@ public enum Coordinates {
         char rank = notation.charAt(1);
         int x = file - 'A';
         int y = rank - '1';
-        return fromCoordinates(x, y);
+        return fromCoordinatesToNo(x, y);
     }
+
+    public static String fromCoordinatesToNotation(int x, int y) {
+        for (Coordinates coordinate : values()) {
+            if (coordinate.getX() == x && coordinate.getY() == y) {
+
+                return coordinate.getNotation();
+            }
+        }
+        throw new IllegalArgumentException("Invalid coordinates: " + x + ", " + y);
+    }
+
+    public static int fromNotationToX(String notation) {
+        char file = notation.charAt(0);
+        char rank = notation.charAt(1);
+        int x = file - 'A';
+        int y = rank - '1';
+        return fromCoordinatesToNo(x, y).getX();
+    }
+
+    public static int fromNotationToY(String notation) {
+        char file = notation.charAt(0);
+        char rank = notation.charAt(1);
+        int x = file - 'A';
+        int y = rank - '1';
+        return fromCoordinatesToNo(x, y).getY();
+    }
+
 }
