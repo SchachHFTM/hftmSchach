@@ -1,39 +1,57 @@
 package ch.hftm.model;
 
-public abstract class Piece {
-     private Color color;
-     private int x;
-     private int y;
+import java.util.ArrayList;
 
-     public Piece(Color color, int x, int y){
+import ch.hftm.Square;
+import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+
+public abstract class Piece extends ImageView {
+    private Color color;
+    public String type;
+    public int x;
+    public int y;
+    ArrayList<String> possibleMoves;
+
+    public Piece(Color color, int x, int y) {
         this.color = color;
         this.x = x;
         this.y = y;
-     }
+        addEventHandler();
+    }
 
-     public Color getColor(){
+    private void addEventHandler() {
+        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                checkPossibleMoves();
+            }
+        });
+    }
+
+    public Color getColor() {
         return color;
-     }
+    }
 
-     public void setColor(Color color){
+    public void setColor(Color color) {
         this.color = color;
-     }
+    }
 
-     public int getX(){
-        return x;
-     }
+    public void checkPossibleMoves() {
+    }
 
-     public void setX(int x){
-        this.x = x;
-     }
+    public Square getSquareByName(String name) {
 
-     public int getY(){
-        return y;
-     }
-
-     public void setY(int y){
-        this.y = y;
-     }
-
-
+        // TODO: Richtig implementieren
+        /*
+         * for (Square square : GameController) {
+         * if (square.name.equals(name)) {
+         * return square;
+         * }
+         * }
+         */
+        return new Square(1, 1);
+    }
 }
