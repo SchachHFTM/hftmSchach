@@ -20,7 +20,7 @@ public class SaveGame {
         this.piecesPosition = piecesPosition;
     }
 
-    private Piece[][] startPiecesPos() {
+    public static Piece[][] startPiecesPos() {
         Piece[][] startingPosition = new Piece[2][16];
 
         // White
