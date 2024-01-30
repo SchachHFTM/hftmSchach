@@ -1,5 +1,9 @@
 package ch.hftm.control;
 
+import java.util.ArrayList;
+
+import ch.hftm.SaveGame;
+import ch.hftm.Square;
 import ch.hftm.Board;
 import ch.hftm.SaveGame;
 import ch.hftm.model.EColorPiece;
@@ -11,10 +15,9 @@ public class Game {
     private boolean whiteTurn;
 
     public Game(GridPane chessBoard, String theme) {
-        this.board = SaveGame.startPiecesPos();
-        this.whiteTurn = true;
-    }
+     
 
+     
 
     public boolean movePiece(int startX, int startY, int endX, int endY){
         Piece startPiece = board[startX][startY];
@@ -24,26 +27,20 @@ public class Game {
             return false;
         }
 
-        // Check if the move is valid for the piece
-        if (!startPiece.checkPossibleMoves(startX, startY, endX, endY, board)) {
+        ArrayList<String> possibleMoves = startPiece.possibleMoves;
+        Square destination = new Square(endX, endY);
+        if(!possibleMoves.contains(destination)){
             return false;
         }
-
-        // Check if there's a piece at the destination
-        Piece endPiece = board[endX][endY];
-        if (endPiece != null) {
-            // Piece captured
-            // Handle piece capture here
-        }
-
-        // Move the piece
-        board[endX][endY] = startPiece;
-        board[startX][startY] = null;
-
-        // Switch turns
-        whiteTurn = !whiteTurn;
-
         return true;
+
     }
+
+    //TODO: SELECT the pieces to move
+
+
+    //TODO: DESELECT the piece to move
+
+    //TODO: Kill the piece to move
     
 }

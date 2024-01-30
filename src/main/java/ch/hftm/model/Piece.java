@@ -14,7 +14,7 @@ public abstract class Piece extends ImageView {
     public String type;
     public int x;
     public int y;
-    ArrayList<String> possibleMoves;
+    public ArrayList<String> possibleMoves;
 
     //Constructor
     public Piece(EColorPiece color, int x, int y) {
