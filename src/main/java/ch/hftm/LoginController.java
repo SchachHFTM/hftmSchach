@@ -1,8 +1,11 @@
 package ch.hftm;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -12,6 +15,7 @@ import javafx.stage.Stage;
 public class LoginController {
 
     private Stage stage;
+    private Board cb;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -29,23 +33,43 @@ public class LoginController {
     @FXML
     private void switchToGame() throws IOException {
         App.setSceneRoot("Game");
+        // GameController gc = GameController.getInstance();
+        // gc.creatABoard();
+        Platform.runLater(() -> {
+            GameController gc = GameController.getInstance();
+            gc.creatABoard();
+        });
 
     }
 
     @FXML
     private void loadGame() throws IOException {
+        App.setSceneRoot("Game");
         String path = App.getCurrentFilePath();
         System.out.println(path);
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(path));
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Save Files", "*.ser"));
-
         fileChooser.setTitle("Load Game");
 
         File selectedFile = fileChooser.showOpenDialog(stage);
+
         if (selectedFile != null) {
             System.out.println("Open File");
             System.out.println(selectedFile.getPath());
+
+            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(selectedFile))) {
+                SaveGame load = (SaveGame) in.readObject();
+
+                // Hier die createAboard-Funktion aufrufen
+                GameController gc = GameController.getInstance();
+                gc.loadABoard(load);
+            } catch (Exception e) {
+                System.out.println(e.getClass().getName());
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 

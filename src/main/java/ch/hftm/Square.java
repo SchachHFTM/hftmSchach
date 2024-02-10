@@ -8,7 +8,7 @@ public class Square extends StackPane {
     public boolean occupied;
     String name;
 
-    public Square(int x, int y) {
+    public Square(int y, int x) {
         this.x = x;
         this.y = y;
         this.occupied = false;

@@ -1,6 +1,7 @@
 package ch.hftm.model;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import ch.hftm.Square;
@@ -9,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public abstract class Piece extends ImageView {
+public abstract class Piece extends ImageView implements Serializable {
     protected EColorPiece color;
     public String type;
     public int x;
@@ -30,8 +31,10 @@ public abstract class Piece extends ImageView {
     }
 
     public void setImage() {
-        String imagePath = "../resources/pieces/" + this.color + this.type + ".png";
-        InputStream inputStream = getClass().getResourceAsStream(imagePath);
+        String imagePath = "/pieces/" + this.color + this.type + ".png";
+        Class<? extends Piece> obj = getClass();
+        InputStream inputStream = obj.getResourceAsStream(imagePath);
+        // InputStream inputStream = getClass().getResourceAsStream(imagePath);
 
         try {
             if (inputStream != null) {
@@ -50,6 +53,14 @@ public abstract class Piece extends ImageView {
 
     public void setColorPiece(EColorPiece color) {
         this.color = color;
+    }
+
+    public int getPieceX() {
+        return x;
+    }
+
+    public int getPieceY() {
+        return y;
     }
 
     public Square getSquareByName(String name) {

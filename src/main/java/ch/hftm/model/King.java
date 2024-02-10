@@ -9,6 +9,7 @@ public class King extends Piece {
     public King(EColorPiece color, int x, int y) {
         super(color, x, y);
         this.type = "King";
+
     }
 
     @Override

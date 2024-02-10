@@ -11,6 +11,7 @@ public class Queen extends Piece {
     public Queen(EColorPiece color, int x, int y) {
         super(color, x, y);
         this.type = "Queen";
+
     }
 
     public void checkPossibleMoves() {
