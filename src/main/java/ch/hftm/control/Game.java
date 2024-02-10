@@ -37,6 +37,9 @@ public class Game {
     }
 
     //TODO: SELECT the pieces to move
+    public Square selectSquare(int startX, int startY){
+        Piece startPiece = board[startX][startY];
+    }
 
 
     //TODO: DESELECT the piece to move
