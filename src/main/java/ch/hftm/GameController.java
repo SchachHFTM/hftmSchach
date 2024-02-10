@@ -1,8 +1,10 @@
 package ch.hftm;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javafx.fxml.FXML;
@@ -17,7 +19,40 @@ public class GameController {
 
     private static GameController instance;
     private Board cb;
-    private SaveGame saveGame;
+    private Stage stage;
+
+    @FXML
+    private Button editPlayer1;
+
+    @FXML
+    private Button editPlayer2;
+
+    @FXML
+    private Button loadGameButton;
+
+    @FXML
+    private Button newGameButton;
+
+    @FXML
+    private Button restartButten;
+
+    @FXML
+    private Button saveGameButton;
+
+    @FXML
+    private TextField textFieldPlayer1;
+
+    @FXML
+    private TextField textFieldPlayer2;
+
+    @FXML
+    private Label timePlayer1;
+
+    @FXML
+    private Label timePlayer2;
+
+    @FXML
+    private GridPane gridPaneBoard;
 
     public static GameController getInstance() {
         if (instance == null) {
@@ -26,29 +61,8 @@ public class GameController {
         return instance;
     }
 
-    private Stage stage;
-
     public void setStage(Stage stage) {
         this.stage = stage;
-    }
-
-    @FXML
-    private GridPane gridPaneBoard;
-
-    @FXML
-    public void creatABoard() {
-        // cb = new Board(gridPaneBoard);
-        if (gridPaneBoard != null) {
-            cb = new Board(gridPaneBoard);
-        } else {
-            System.out.println("gridPaneBoard is null");
-        }
-
-    }
-
-    public void loadABoard(SaveGame saveGame) {
-        cb = new Board(gridPaneBoard, saveGame);
-
     }
 
     @FXML
@@ -57,8 +71,42 @@ public class GameController {
     }
 
     @FXML
-    private void saveGameButton() throws IOException {
+    public void creatAboard() {
+        cb = new Board(gridPaneBoard);
+        newGameButton.setDisable(true);
+        restartButten.setDisable(false);
+
+        // if (gridPaneBoard != null) {
+        //     cb = new Board(gridPaneBoard);
+        // } else {
+        //     System.out.println("gridPaneBoard is null");
+        // }
+
+    }
+
+    @FXML
+    public void loadAboard(SaveGame saveGame) {
+        cb = new Board(gridPaneBoard, saveGame);
+        newGameButton.setDisable(true);
+        restartButten.setDisable(false);
+    }
+
+    @FXML
+    public void newGamebuttonVisible() {
+        newGameButton.setDisable(false);
+        restartButten.setDisable(true);
+    }
+
+    @FXML
+    private void saveGame() throws IOException {
         SaveGame save = cb.currentGame;
+        //TODO löschen ****test */
+        // cb.currentGame.piecesPosition[1][2].x = 4;
+        // cb.currentGame.piecesPosition[1][2].y = 4;
+        // cb.currentGame.piecesPosition[0][1].y = 3;
+        // cb.currentGame.piecesPosition[0][2].y = 3;
+
+        //end Test
         String path = App.getCurrentFilePath();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(path));
@@ -74,27 +122,30 @@ public class GameController {
     };
 
     @FXML
-    private Button Start;
+    private void loadGame() throws IOException {
+        String path = App.getCurrentFilePath();
+        System.out.println(path);
 
-    @FXML
-    private Button editPlayer1;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(path));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Save Files", "*.ser"));
+        fileChooser.setTitle("Load Game");
 
-    @FXML
-    private Button editPlayer2;
+        File selectedFile = fileChooser.showOpenDialog(stage);
 
-    @FXML
-    private Button restartButten;
+        if (selectedFile != null) {
+            System.out.println("Open File");
+            System.out.println(selectedFile.getPath());
 
-    @FXML
-    private TextField textFieldPlayer1;
-
-    @FXML
-    private TextField textFieldPlayer2;
-
-    @FXML
-    private Label timePlayer1;
-
-    @FXML
-    private Label timePlayer2;
+            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(selectedFile))) {
+                SaveGame load = (SaveGame) in.readObject();
+                loadAboard(load);
+            } catch (Exception e) {
+                System.out.println(e.getClass().getName());
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
