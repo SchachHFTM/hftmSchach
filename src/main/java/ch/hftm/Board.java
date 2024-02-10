@@ -2,6 +2,7 @@ package ch.hftm;
 
 import java.util.ArrayList;
 
+import ch.hftm.control.Game;
 import ch.hftm.model.Piece;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
@@ -15,12 +16,14 @@ public class Board {
     private Color colorWithe = Color.web("#facf9d");
     public ArrayList<Square> squares = new ArrayList<>();
     public SaveGame currentGame = new SaveGame();
+    public Game game;
 
     // public Board() {
     // };
 
-    public Board(GridPane board, SaveGame currentGame) {
+    public Board(GridPane board, SaveGame currentGame, Game game) {
         this.board = board;
+        this.game = game;
         initializeBoard(this.board, colorBlack, colorWithe);
         setPiecesOnBoard(currentGame.piecesPosition);
 
@@ -60,12 +63,16 @@ public class Board {
     }
 
     private void setPiecesOnBoard(Piece[][] piArray) {
-
         for (int i = 0; i < piArray.length; i++) {
             for (int j = 0; j < piArray[i].length; j++) {
                 Piece pi = piArray[i][j];
                 int x = pi.getPieceX();
                 int y = pi.getPieceY();
+
+
+                pi.setOnMouseClicked(event -> {
+                    handlePieceClick(x, y);
+                });
                 //TODO getSquarbyName hier einbauen
                 for (Square square : squares) {
                     if (square.x == x && square.y == y) {
@@ -77,4 +84,12 @@ public class Board {
         }
     }
 
+    private void handlePieceClick(int row, int col) {
+        // Retrieve the Piece object associated with the clicked ImageView
+        Piece piece = game.getBoard()[row][col];
+        if (piece != null) {
+            // Call movePiece method when a piece is clicked
+            game.movePiece(piece.getPieceX(),piece.getPieceY(), row, col);
+        }
+    }
 }

@@ -2,10 +2,7 @@ package ch.hftm.control;
 
 import java.util.ArrayList;
 
-import ch.hftm.SaveGame;
 import ch.hftm.Square;
-import ch.hftm.Board;
-import ch.hftm.SaveGame;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
 import javafx.scene.layout.GridPane;
@@ -14,12 +11,13 @@ public class Game {
     private Piece[][] board;
     private boolean whiteTurn;
 
+    public Piece[][] getBoard() {
+        return board;
+    }
+    
     public Game(GridPane chessBoard, String theme) {
-     
 
-     
-
-    public boolean movePiece(int startX, int startY, int endX, int endY){
+    public boolean movePiece(int startX, int startY, int endX, int endY) {
         Piece startPiece = board[startX][startY];
 
         if (startPiece == null || startPiece.getColor() != EColorPiece.WHITE) {
@@ -29,21 +27,20 @@ public class Game {
 
         ArrayList<String> possibleMoves = startPiece.possibleMoves;
         Square destination = new Square(endX, endY);
-        if(!possibleMoves.contains(destination)){
+        if (!possibleMoves.contains(destination)) {
             return false;
         }
         return true;
 
     }
 
-    //TODO: SELECT the pieces to move
-    public Square selectSquare(int startX, int startY){
+    // TODO: SELECT the pieces to move
+    public Square selectSquare(int startX, int startY) {
         Piece startPiece = board[startX][startY];
     }
 
+    // TODO: DESELECT the piece to move
 
-    //TODO: DESELECT the piece to move
+    // TODO: Kill the piece to move
 
-    //TODO: Kill the piece to move
-    
 }

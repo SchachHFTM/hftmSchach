@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import ch.hftm.control.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,9 +47,8 @@ public class GameController {
 
     }
 
-    public void loadABoard(SaveGame saveGame) {
-        cb = new Board(gridPaneBoard, saveGame);
-
+    public void loadABoard(SaveGame saveGame, Game game) {
+        cb = new Board(gridPaneBoard, saveGame, game);
     }
 
     @FXML
@@ -70,7 +70,6 @@ public class GameController {
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(save);
         out.close();
-
     };
 
     @FXML
