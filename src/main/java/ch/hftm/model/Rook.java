@@ -10,7 +10,8 @@ public class Rook extends Piece {
     //Constructor
     public Rook(EColorPiece color, int x, int y) {
         super(color, x, y);
-        this.type = "Rock";
+        this.type = "Rook";
+
     }
 
     public void checkPossibleMoves() {
