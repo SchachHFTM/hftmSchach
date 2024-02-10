@@ -4,11 +4,12 @@ import javafx.scene.layout.StackPane;
 
 public class Square extends StackPane {
 
-    int x, y;
+    public int x;
+    public int y;
     public boolean occupied;
     String name;
 
-    public Square(int x, int y) {
+    public Square(int y, int x) {
         this.x = x;
         this.y = y;
         this.occupied = false;

@@ -1,5 +1,7 @@
 package ch.hftm;
 
+import java.io.Serializable;
+
 import ch.hftm.model.Bishop;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.King;
@@ -9,16 +11,45 @@ import ch.hftm.model.Piece;
 import ch.hftm.model.Queen;
 import ch.hftm.model.Rook;
 
-public class SaveGame {
+public class SaveGame implements Serializable {
 
     Piece[][] piecesPosition;
-    Boolean startOrLoad;
+
+    Boolean CurrentPlayer;
 
     //TODO konzept überdenken start und laden
 
-    public SaveGame(Piece[][] piecesPosition, Boolean startOrLoad) {
+    public SaveGame(Piece[][] piecesPosition) {
         this.piecesPosition = piecesPosition;
     }
+
+    public SaveGame() {
+
+    }
+
+    //Getter and Setter
+
+    public Piece[][] getPiecesPosition() {
+        return piecesPosition;
+    }
+
+    public void setPiecesPosition(Piece[][] piecesPosition) {
+        this.piecesPosition = piecesPosition;
+    }
+
+    public void setNewGamePiecesPosition() {
+        this.piecesPosition = startPiecesPos();
+    }
+
+    public Boolean getCurrentPlayer() {
+        return CurrentPlayer;
+    }
+
+    public void setCurrentPlayer(Boolean currentPlayer) {
+        CurrentPlayer = currentPlayer;
+    }
+
+    // 
 
     private Piece[][] startPiecesPos() {
         Piece[][] startingPosition = new Piece[2][16];
