@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 
 public class GameController {
 
-    private static GameController instance;
     private Board cb;
     private Stage stage;
     private String tempPlayerWhite;
@@ -100,13 +99,6 @@ public class GameController {
 
             SaveGame save = cb.currentGame;
 
-            //TODO löschen ****test */
-            save.piecesPosition[1][2].x = 4;
-            save.piecesPosition[1][2].y = 4;
-            save.piecesPosition[0][1].y = 3;
-            save.piecesPosition[0][2].y = 3;
-            //end Test
-
             if (tempPlayerBlack != null || tempPlayerWhite != null) {
                 save.setPlayerNameWhite(tempPlayerWhite);
                 save.setPlayerNameBlack(tempPlayerBlack);
@@ -172,6 +164,9 @@ public class GameController {
         }
     }
 
+    // This 2 Method Save the GamePlayer name Direkt in to the SaveGame Classe. But is cb is null. Than save the NAme in a Temp Variable oft the GameController.
+    // By the SaveGame Methode, we Check is the TempVariabl != Null. it's that true. WE Save this TemVariable Name in the SaveGame class
+
     @FXML
     private void SaveOrEditNameWhite() throws IOException {
 
@@ -213,7 +208,7 @@ public class GameController {
             if (cb == null) {
                 throw new NullPointerException("cb is null");
             }
-            cb.currentGame.setPlayerNameWhite(playerBlack);
+            cb.currentGame.setPlayerNameBlack(playerBlack);
 
         } catch (NullPointerException e) {
             tempPlayerBlack = playerBlack;
