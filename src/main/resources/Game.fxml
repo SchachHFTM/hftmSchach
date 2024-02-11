@@ -44,9 +44,9 @@
       <AnchorPane layoutX="530.0" layoutY="164.0" prefHeight="106.0" prefWidth="240.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="180.0">
          <children>
             <Label layoutX="87.0" layoutY="6.0" text="Black Player" />
-            <TextField fx:id="textFieldPlayer2" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" />
+            <TextField fx:id="textFieldPlayer2" disable="true" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" text="Black Player" AnchorPane.leftAnchor="0.0" />
             <Label layoutX="9.0" layoutY="63.0" prefHeight="25.0" prefWidth="150.0" text="Time Left Player 2" AnchorPane.leftAnchor="0.0" />
-            <Button fx:id="editPlayer2" layoutX="174.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" />
+            <Button fx:id="editPlayer2" layoutX="174.0" layoutY="30.0" mnemonicParsing="false" onAction="#SaveOrEditNameBlack" prefHeight="25.0" prefWidth="50.0" text="Edit" />
             <Label fx:id="timePlayer2" alignment="CENTER" layoutX="162.0" layoutY="63.0" prefHeight="25.0" prefWidth="75.0" text="00:00" />
          </children>
       </AnchorPane>
@@ -60,11 +60,11 @@
       <Label alignment="CENTER" layoutX="10.0" layoutY="57.0" prefHeight="17.0" prefWidth="28.0" text="1" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="470.0" />
       <AnchorPane layoutX="530.0" layoutY="38.0" prefHeight="106.0" prefWidth="240.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
          <children>
-            <TextField fx:id="textFieldPlayer1" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" />
+            <TextField fx:id="textFieldPlayer1" disable="true" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" text="White Player" AnchorPane.leftAnchor="0.0" />
             <Label layoutX="9.0" layoutY="63.0" prefHeight="25.0" prefWidth="150.0" text="Time Left Player 2" AnchorPane.leftAnchor="0.0" />
-            <Button fx:id="editPlayer1" layoutX="174.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" />
             <Label fx:id="timePlayer1" alignment="CENTER" layoutX="162.0" layoutY="63.0" prefHeight="25.0" prefWidth="75.0" text="00:00" />
             <Label layoutX="87.0" layoutY="6.0" text="White Player" />
+            <Button fx:id="editPlayer1" layoutX="175.0" layoutY="30.0" mnemonicParsing="false" onAction="#SaveOrEditNameWhite" prefHeight="25.0" prefWidth="50.0" text="Edit" />
          </children>
       </AnchorPane>
       <ButtonBar layoutX="28.0" layoutY="534.0" prefHeight="40.0" prefWidth="200.0">
