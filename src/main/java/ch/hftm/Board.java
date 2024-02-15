@@ -12,32 +12,27 @@ public class Board {
 
     @FXML
     GridPane board;
-    private Color colorBlack = Color.web("#cd8c3f");
-    private Color colorWithe = Color.web("#facf9d");
     public ArrayList<Square> squares = new ArrayList<>();
     public SaveGame currentGame = new SaveGame();
     public Game game;
 
-    // public Board() {
-    // };
-
     public Board(GridPane board, SaveGame currentGame, Game game) {
         this.board = board;
         this.game = game;
-        initializeBoard(this.board, colorBlack, colorWithe);
+        initializeBoard(this.board);
         setPiecesOnBoard(currentGame.piecesPosition);
 
     }
 
     public Board(GridPane board) {
         this.board = board;
-        initializeBoard(this.board, colorBlack, colorWithe);
+        initializeBoard(this.board);
         currentGame.setNewGamePiecesPosition();
         setPiecesOnBoard(currentGame.piecesPosition);
 
     }
 
-    private void initializeBoard(GridPane board, Color colorBlack, Color colorWithe) {
+    private void initializeBoard(GridPane board) {
         // Set all Square for the GridPane with Coordiates
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {

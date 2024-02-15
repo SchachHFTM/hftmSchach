@@ -18,7 +18,7 @@ public class Queen extends Piece {
         int x = this.x;
         int y = this.y;
         this.possibleMoves = new ArrayList<>();
-        //Todo Aktueller Spiele Implementieren und diese Attribut loschen oder ersetzen
+        //TODO Aktueller Spiele Implementieren und diese Attribut loschen oder ersetzen
         String currentPlayer = "Withe";
 
         int[] xHorizontal = { -1, 1, 0, 0 }; // horizontal directions
