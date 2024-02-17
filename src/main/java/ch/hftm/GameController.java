@@ -17,9 +17,10 @@ import javafx.stage.Stage;
 
 public class GameController {
 
-    private static GameController instance;
     private Board cb;
     private Stage stage;
+    private String tempPlayerWhite;
+    private String tempPlayerBlack;
 
     @FXML
     private Button editPlayer1;
@@ -54,72 +55,86 @@ public class GameController {
     @FXML
     private GridPane gridPaneBoard;
 
-    public static GameController getInstance() {
-        if (instance == null) {
-            instance = new GameController();
-        }
-        return instance;
-    }
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    @FXML
-    private void switchToPrimary() throws IOException {
-        App.setSceneRoot("Login");
-    }
-
+    // This method is started with the "New Game" button. It loads a default new game.
     @FXML
     public void creatAboard() {
         cb = new Board(gridPaneBoard);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
-
-        // if (gridPaneBoard != null) {
-        //     cb = new Board(gridPaneBoard);
-        // } else {
-        //     System.out.println("gridPaneBoard is null");
-        // }
-
+        textFieldPlayer1.setText("White Player");
+        textFieldPlayer2.setText("Black Player");
     }
 
+    // This method is triggered in the LoadGame mehtode and creates a new board with the transferred savegame
     @FXML
     public void loadAboard(SaveGame saveGame) {
         cb = new Board(gridPaneBoard, saveGame);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
+        textFieldPlayer1.setText(cb.currentGame.getPlayerNameWhite());
+        textFieldPlayer2.setText(cb.currentGame.getPlayerNameBlack());
+
     }
 
+    ///This method is used by the restart button and is just a backup to make sure you don't accidentally reset the game.
     @FXML
     public void newGamebuttonVisible() {
         newGameButton.setDisable(false);
         restartButten.setDisable(true);
     }
 
+    //the SaveGame method. Saves the current SaveGame class in a serializable file To do this,first open a Filechosser menu to define the path and file name. 
+    //Then the SaveGame class is saved there
     @FXML
     private void saveGame() throws IOException {
-        SaveGame save = cb.currentGame;
-        //TODO löschen ****test */
-        // cb.currentGame.piecesPosition[1][2].x = 4;
-        // cb.currentGame.piecesPosition[1][2].y = 4;
-        // cb.currentGame.piecesPosition[0][1].y = 3;
-        // cb.currentGame.piecesPosition[0][2].y = 3;
+        try {
+            // Check if cb is null
+            if (cb == null) {
+                throw new NullPointerException("cb is null");
+            }
 
-        //end Test
-        String path = App.getCurrentFilePath();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(path));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Save Files", "*.ser"));
-        fileChooser.setInitialFileName("mySavedGame.ser");
-        fileChooser.setTitle("Save Game");
-        File selectedFile = fileChooser.showSaveDialog(stage);
-        FileOutputStream fileOut = new FileOutputStream(selectedFile);
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(save);
-        out.close();
+            SaveGame save = cb.currentGame;
 
-    };
+            if (tempPlayerBlack != null || tempPlayerWhite != null) {
+                save.setPlayerNameWhite(tempPlayerWhite);
+                save.setPlayerNameBlack(tempPlayerBlack);
+            }
+
+            String path = App.getCurrentFilePath();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File(path));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Save Files", "*.ser"));
+            fileChooser.setInitialFileName("mySavedGame.ser");
+            fileChooser.setTitle("Save Game");
+            File selectedFile = fileChooser.showSaveDialog(stage);
+            FileOutputStream fileOut = new FileOutputStream(selectedFile);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(save);
+            out.close();
+        } catch (NullPointerException e) {
+
+            System.err.println("Error: cb is null. Unable to save game.");
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            System.err.println("Error: Unable to save game due to IO Exception.");
+            e.printStackTrace();
+            //
+        } catch (Exception e) {
+
+            System.err.println("Error: An unexpected error occurred while saving the game.");
+            e.printStackTrace();
+
+        }
+    }
+
+    //the loadGame method.Loads a SaveGame class from  a serializable file.First a Filechosser menu is opened to get the path and file.
+    //Then the SaveGame class is given to the LoadAboard() method to load the game board
 
     @FXML
     private void loadGame() throws IOException {
@@ -139,6 +154,7 @@ public class GameController {
 
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(selectedFile))) {
                 SaveGame load = (SaveGame) in.readObject();
+
                 loadAboard(load);
             } catch (Exception e) {
                 System.out.println(e.getClass().getName());
@@ -148,4 +164,55 @@ public class GameController {
         }
     }
 
+    // This 2 Method Save the GamePlayer name Direkt in to the SaveGame Classe. But is cb is null. Than save the NAme in a Temp Variable oft the GameController.
+    // By the SaveGame Methode, we Check is the TempVariabl != Null. it's that true. WE Save this TemVariable Name in the SaveGame class
+
+    @FXML
+    private void SaveOrEditNameWhite() throws IOException {
+
+        if (editPlayer1.getText().equals("Save")) {
+            editPlayer1.setText("Edit");
+            textFieldPlayer1.setDisable(true);
+        } else {
+            editPlayer1.setText("Save");
+            textFieldPlayer1.setDisable(false);
+        }
+
+        String playerWhite = textFieldPlayer1.getText();
+
+        try {
+            if (cb == null) {
+                throw new NullPointerException("cb is null");
+            }
+            cb.currentGame.setPlayerNameWhite(playerWhite);
+
+        } catch (NullPointerException e) {
+            tempPlayerWhite = playerWhite;
+
+        }
+
+    }
+
+    @FXML
+    private void SaveOrEditNameBlack() throws IOException {
+
+        if (editPlayer2.getText().equals("Save")) {
+            editPlayer2.setText("Edit");
+            textFieldPlayer2.setDisable(true);
+        } else {
+            editPlayer2.setText("Save");
+            textFieldPlayer2.setDisable(false);
+        }
+        String playerBlack = textFieldPlayer2.getText();
+        try {
+            if (cb == null) {
+                throw new NullPointerException("cb is null");
+            }
+            cb.currentGame.setPlayerNameBlack(playerBlack);
+
+        } catch (NullPointerException e) {
+            tempPlayerBlack = playerBlack;
+        }
+
+    }
 }

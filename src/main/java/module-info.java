@@ -4,5 +4,6 @@ module ch.hftm {
     requires javafx.fxml;
 
     opens ch.hftm to javafx.fxml;
+
     exports ch.hftm;
 }
