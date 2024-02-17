@@ -1,27 +1,26 @@
 package ch.hftm;
 
-import java.util.ArrayList;
-
 import ch.hftm.control.Game;
 import ch.hftm.model.Piece;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
-public class Board {
+import java.util.ArrayList;
+
+public class Board extends GridPane {
 
     @FXML
     GridPane board;
     public ArrayList<Square> squares = new ArrayList<>();
     public SaveGame currentGame = new SaveGame();
+
     public Game game;
 
-    public Board(GridPane board, SaveGame currentGame, Game game) {
+    public Board(GridPane board, SaveGame currentGame) {
         this.board = board;
-        this.game = game;
+        this.game = new Game(board, "");
         initializeBoard(this.board);
         setPiecesOnBoard(currentGame.piecesPosition);
-
     }
 
     public Board(GridPane board) {
@@ -29,7 +28,6 @@ public class Board {
         initializeBoard(this.board);
         currentGame.setNewGamePiecesPosition();
         setPiecesOnBoard(currentGame.piecesPosition);
-
     }
 
     private void initializeBoard(GridPane board) {
@@ -43,7 +41,7 @@ public class Board {
                 } else {
                     square.setStyle("-fx-background-color: #cd8c3f;");
                 }
-
+                square.setOnMouseClicked(e -> addPieceClickListener(square));
                 board.add(square, col, row, 1, 1);
                 squares.add(square);
             }
@@ -63,28 +61,24 @@ public class Board {
                 Piece pi = piArray[i][j];
                 int x = pi.getPieceX();
                 int y = pi.getPieceY();
-
-
-                pi.setOnMouseClicked(event -> {
-                    handlePieceClick(x, y);
-                });
-                //TODO getSquarbyName hier einbauen
-                for (Square square : squares) {
-                    if (square.x == x && square.y == y) {
-                        addPiece(square, pi);
+                if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+                    for (Square square : squares) {
+                        if (square.x == x && square.y == y) {
+                            square.setPiece(pi); // Associate the piece with the square
+                            addPiece(square, pi);
+                        }
                     }
                 }
-
             }
         }
     }
 
-    private void handlePieceClick(int row, int col) {
-        // Retrieve the Piece object associated with the clicked ImageView
-        Piece piece = game.getBoard()[row][col];
+    private void addPieceClickListener(Square square) {
+        Piece piece = square.getPiece();
         if (piece != null) {
-            // Call movePiece method when a piece is clicked
-            game.movePiece(piece.getPieceX(),piece.getPieceY(), row, col);
+            System.out.println("Selected piece: " + piece + " " + piece.getPieceY());
+        } else {
+            System.out.println("No piece on this square.");
         }
     }
 }

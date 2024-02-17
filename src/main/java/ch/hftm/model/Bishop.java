@@ -13,7 +13,7 @@ public class Bishop extends Piece {
         this.type = "Bishop";
 
     }
-
+@Override
     public void checkPossibleMoves() {
         int x = this.x;
         int y = this.y;

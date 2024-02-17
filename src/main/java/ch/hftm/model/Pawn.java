@@ -12,7 +12,7 @@ public class Pawn extends Piece {
         this.type = "Pawn";
 
     }
-
+    @Override
     public void checkPossibleMoves() {
         int x = this.x;
         int y = this.y;

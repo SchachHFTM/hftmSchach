@@ -11,8 +11,7 @@ public class King extends Piece {
         this.type = "King";
 
     }
-
-    @Override
+ /*   @Override
     public void checkPossibleMoves() {
         int x = this.x;
         int y = this.y;
@@ -39,6 +38,26 @@ public class King extends Piece {
                 }
             }
         }
+    }*/
+
+    @Override
+    public void checkPossibleMoves() {
+        this.possibleMoves = new ArrayList<>();
+
+        int[][] kingMoves = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 } };
+
+        for (int[] move : kingMoves) {
+            int newX = x + move[0];
+            int newY = y + move[1];
+
+            if (isValidPosition(newX, newY)) {
+                possibleMoves.add(Coordinates.fromCoordinatesToNotation(newX, newY));
+            }
+        }
+    }
+
+    private boolean isValidPosition(int x, int y) {
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
     }
 
 }

@@ -3,6 +3,7 @@ package ch.hftm.model;
 import java.util.ArrayList;
 
 import ch.hftm.Coordinates;
+import ch.hftm.Square;
 
 public class Knight extends Piece {
 
@@ -12,8 +13,7 @@ public class Knight extends Piece {
         this.type = "Knight";
 
     }
-
-    @Override
+ /*   @Override
     public void checkPossibleMoves() {
         int x = this.x;
         int y = this.y;
@@ -37,6 +37,24 @@ public class Knight extends Piece {
             }
         }
 
-    }
+    }*/
+ @Override
+ public void checkPossibleMoves() {
+     this.possibleMoves = new ArrayList<>();
 
+     int[][] knightMoves = { { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 }, { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 } };
+
+     for (int[] move : knightMoves) {
+         int newX = x + move[0];
+         int newY = y + move[1];
+
+         if (isValidPosition(newX, newY)) {
+             possibleMoves.add(Coordinates.fromCoordinatesToNotation(newX, newY));
+         }
+     }
+ }
+
+    private boolean isValidPosition(int x, int y) {
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
+    }
 }

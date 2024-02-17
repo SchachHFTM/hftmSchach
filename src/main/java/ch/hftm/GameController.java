@@ -77,12 +77,10 @@ public class GameController {
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
 
-        // if (gridPaneBoard != null) {
-        //     cb = new Board(gridPaneBoard);
-        // } else {
-        //     System.out.println("gridPaneBoard is null");
-        // }
+    }
 
+    public void loadABoard(SaveGame saveGame) {
+        cb = new Board(gridPaneBoard, saveGame);
     }
 
     @FXML

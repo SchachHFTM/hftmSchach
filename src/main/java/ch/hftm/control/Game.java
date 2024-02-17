@@ -1,11 +1,12 @@
 package ch.hftm.control;
 
-import java.util.ArrayList;
-
 import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.layout.GridPane;
+
+import java.util.ArrayList;
 
 public class Game {
     private Piece[][] board;
@@ -14,8 +15,9 @@ public class Game {
     public Piece[][] getBoard() {
         return board;
     }
-    
+
     public Game(GridPane chessBoard, String theme) {
+    }
 
     public boolean movePiece(int startX, int startY, int endX, int endY) {
         Piece startPiece = board[startX][startY];
@@ -35,12 +37,19 @@ public class Game {
     }
 
     // TODO: SELECT the pieces to move
-    public Square selectSquare(int startX, int startY) {
+    public Piece selectPiece(int startX, int startY) {
         Piece startPiece = board[startX][startY];
+        return startPiece;
     }
 
+
+    public void handlePieceClick(int row, int col) {
+        Piece piece = board[row][col];
+        System.out.println(row + "," + col);
+        System.out.println(piece);
+    }
     // TODO: DESELECT the piece to move
 
     // TODO: Kill the piece to move
-
 }
+

@@ -13,7 +13,7 @@ public class Rook extends Piece {
         this.type = "Rook";
 
     }
-
+ /*   @Override
     public void checkPossibleMoves() {
         int x = this.x;
         int y = this.y;
@@ -45,6 +45,38 @@ public class Rook extends Piece {
                 possibleMoves.add(squareName);
             }
         }
+    }*/
+ @Override
+ public void checkPossibleMoves() {
+     this.possibleMoves = new ArrayList<>();
+
+     int[][] rookMoves = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+     for (int[] move : rookMoves) {
+         int dx = move[0];
+         int dy = move[1];
+
+         for (int i = 1; i < 8; i++) {
+             int newX = x + dx * i;
+             int newY = y + dy * i;
+
+             if (!isValidPosition(newX, newY)) {
+                 break;
+             }
+             if (isAtBorder(newX, newY)) {
+                 break;
+             }
+
+             possibleMoves.add(Coordinates.fromCoordinatesToNotation(newX, newY));
+         }
+     }
+ }
+
+    private boolean isValidPosition(int x, int y) {
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
     }
 
+    private boolean isAtBorder(int x, int y) {
+        return x <= 0 || x >= 7 || y <= 0 || y >= 7;
+    }
 }
