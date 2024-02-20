@@ -1,12 +1,11 @@
 package ch.hftm.control;
 
+import java.util.ArrayList;
+
 import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.layout.GridPane;
-
-import java.util.ArrayList;
 
 public class Game {
     private Piece[][] board;
@@ -21,7 +20,6 @@ public class Game {
 
     public boolean movePiece(int startX, int startY, int endX, int endY) {
         Piece startPiece = board[startX][startY];
-
         if (startPiece == null || startPiece.getColor() != EColorPiece.WHITE) {
             // No piece at the starting position or it's not the player's turn
             return false;
@@ -33,7 +31,6 @@ public class Game {
             return false;
         }
         return true;
-
     }
 
     // TODO: SELECT the pieces to move
@@ -41,15 +38,7 @@ public class Game {
         Piece startPiece = board[startX][startY];
         return startPiece;
     }
-
-
-    public void handlePieceClick(int row, int col) {
-        Piece piece = board[row][col];
-        System.out.println(row + "," + col);
-        System.out.println(piece);
-    }
     // TODO: DESELECT the piece to move
 
     // TODO: Kill the piece to move
 }
-

@@ -32,7 +32,6 @@ public class Square extends StackPane {
         return "Square";
     }
 
-
     public void setPiece(Piece piece) {
         this.piece = piece;
     }
@@ -43,6 +42,10 @@ public class Square extends StackPane {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
