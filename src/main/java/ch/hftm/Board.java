@@ -17,10 +17,11 @@ public class Board extends GridPane {
     private Square selectedSquare;
     private Piece selectedPiece;
 
-    public Board(GridPane board, SaveGame currentGame) {
+    public Board(GridPane board, SaveGame currentGameFromSave) {
         this.board = board;
         initializeBoard(this.board);
-        setPiecesOnBoard(currentGame.piecesPosition);
+        setPiecesOnBoard(currentGameFromSave.piecesPosition);
+        currentGame = currentGameFromSave;
     }
 
     public Board(GridPane board) {

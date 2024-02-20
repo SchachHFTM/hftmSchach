@@ -1,14 +1,14 @@
 package ch.hftm;
 
 public enum Coordinates {
-    A1(0, 0), B1(1, 0), C1(2, 0), D1(3, 0), E1(4, 0), F1(5, 0), G1(6, 0), H1(7, 0),
-    A2(0, 1), B2(1, 1), C2(2, 1), D2(3, 1), E2(4, 1), F2(5, 1), G2(6, 1), H2(7, 1),
-    A3(0, 2), B3(1, 2), C3(2, 2), D3(3, 2), E3(4, 2), F3(5, 2), G3(6, 2), H3(7, 2),
-    A4(0, 3), B4(1, 3), C4(2, 3), D4(3, 3), E4(4, 3), F4(5, 3), G4(6, 3), H4(7, 3),
-    A5(0, 4), B5(1, 4), C5(2, 4), D5(3, 4), E5(4, 4), F5(5, 4), G5(6, 4), H5(7, 4),
-    A6(0, 5), B6(1, 5), C6(2, 5), D6(3, 5), E6(4, 5), F6(5, 5), G6(6, 5), H6(7, 5),
-    A7(0, 6), B7(1, 6), C7(2, 6), D7(3, 6), E7(4, 6), F7(5, 6), G7(6, 6), H7(7, 6),
-    A8(0, 7), B8(1, 7), C8(2, 7), D8(3, 7), E8(4, 7), F8(5, 7), G8(6, 7), H8(7, 7);
+    A1(0, 0), B1(0, 1), C1(0, 2), D1(0, 3), E1(0, 4), F1(0, 5), G1(0, 6), H1(0, 7),
+    A2(1, 0), B2(1, 1), C2(1, 2), D2(1, 3), E2(1, 4), F2(1, 5), G2(1, 6), H2(1, 7),
+    A3(2, 0), B3(2, 1), C3(2, 2), D3(2, 3), E3(2, 4), F3(2, 5), G3(2, 6), H3(2, 7),
+    A4(3, 0), B4(3, 1), C4(3, 2), D4(3, 3), E4(3, 4), F4(3, 5), G4(3, 6), H4(3, 7),
+    A5(4, 0), B5(4, 1), C5(4, 2), D5(4, 3), E5(4, 4), F5(4, 5), G5(4, 6), H5(4, 7),
+    A6(5, 0), B6(5, 1), C6(5, 2), D6(5, 3), E6(5, 4), F6(5, 5), G6(5, 6), H6(5, 7),
+    A7(6, 0), B7(6, 1), C7(6, 2), D7(6, 3), E7(6, 4), F7(6, 5), G7(6, 6), H7(6, 7),
+    A8(7, 0), B8(7, 1), C8(7, 2), D8(7, 3), E8(7, 4), F8(7, 5), G8(7, 6), H8(7, 7);
 
     private final int x;
     private final int y;
@@ -32,9 +32,9 @@ public enum Coordinates {
         return notation;
     }
 
-    private static String convertToNotation(int x, int y) {
-        char file = (char) ('A' + x);
-        char rank = (char) ('1' + y);
+    public static String convertToNotation(int x, int y) {
+        char file = (char) ('A' + y);
+        char rank = (char) ('1' + x);
         return String.valueOf(file) + rank;
     }
 
@@ -50,8 +50,8 @@ public enum Coordinates {
     public static Coordinates fromNotation(String notation) {
         char file = notation.charAt(0);
         char rank = notation.charAt(1);
-        int x = file - 'A';
-        int y = rank - '1';
+        int y = file - 'A';
+        int x = rank - '1';
         return fromCoordinatesToNo(x, y);
     }
 
@@ -68,17 +68,16 @@ public enum Coordinates {
     public static int fromNotationToX(String notation) {
         char file = notation.charAt(0);
         char rank = notation.charAt(1);
-        int x = file - 'A';
-        int y = rank - '1';
+        int y = file - 'A';
+        int x = rank - '1';
         return fromCoordinatesToNo(x, y).getX();
     }
 
     public static int fromNotationToY(String notation) {
         char file = notation.charAt(0);
         char rank = notation.charAt(1);
-        int x = file - 'A';
-        int y = rank - '1';
+        int y = file - 'A';
+        int x = rank - '1';
         return fromCoordinatesToNo(x, y).getY();
     }
-
 }

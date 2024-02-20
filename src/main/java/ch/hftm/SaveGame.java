@@ -1,16 +1,32 @@
 package ch.hftm;
 
-import ch.hftm.model.*;
-
 import java.io.Serializable;
+
+import ch.hftm.model.Bishop;
+import ch.hftm.model.EColorPiece;
+import ch.hftm.model.King;
+import ch.hftm.model.Knight;
+import ch.hftm.model.Pawn;
+import ch.hftm.model.Piece;
+import ch.hftm.model.Queen;
+import ch.hftm.model.Rook;
+
+/*
+The SaveGame class is a current version of the game. The class has all piece positions as well as the names of the players and the current player.
+It also has the startPiecesPos() and setNewGamePiecesPosition() to create a game start.
+ */
 
 public class SaveGame implements Serializable {
 
     Piece[][] piecesPosition;
 
     Boolean CurrentPlayer;
+    private String PlayerNameWhite;
+    private String PlayerNameBlack;
+    // private Timer PlattimePlayerWhite;
+    // private Timer PlattimePlayerBlack;
 
-    //TODO konzept überdenken start und laden
+    // TODO konzept überdenken start und laden
     public SaveGame() {
     }
 
@@ -19,6 +35,48 @@ public class SaveGame implements Serializable {
     }
 
     private Piece[][] initializingStartingPieces() {
+
+    public Boolean getCurrentPlayer() {
+        return CurrentPlayer;
+    }
+
+    public void setCurrentPlayer(Boolean currentPlayer) {
+        CurrentPlayer = currentPlayer;
+    }
+
+    public String getPlayerNameWhite() {
+        return PlayerNameWhite;
+    }
+
+    public void setPlayerNameWhite(String playerNameWhite) {
+        PlayerNameWhite = playerNameWhite;
+    }
+
+    public String getPlayerNameBlack() {
+        return PlayerNameBlack;
+    }
+
+    public void setPlayerNameBlack(String playerNameBlack) {
+        PlayerNameBlack = playerNameBlack;
+    }
+
+    // public Timer getPlattimePlayerWhite() {
+    // return PlattimePlayerWhite;
+    // }
+
+    // public void setPlattimePlayerWhite(Timer plattimePlayerWhite) {
+    // PlattimePlayerWhite = plattimePlayerWhite;
+    // }
+
+    // public Timer getPlattimePlayerBlack() {
+    // return PlattimePlayerBlack;
+    // }
+
+    // public void setPlattimePlayerBlack(Timer plattimePlayerBlack) {
+    // PlattimePlayerBlack = plattimePlayerBlack;
+    // }
+
+    private Piece[][] startPiecesPos() {
         Piece[][] startingPosition = new Piece[2][16];
 
         // White
