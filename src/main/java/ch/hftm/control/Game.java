@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class Game {
-    private Piece[][] board;
     private boolean whiteTurn;
 
     public Game() {
@@ -60,7 +59,7 @@ public class Game {
         destinationSquare.setPiece(startPiece);
         destinationSquare.occupied = true;
 
-        startPiece.checkPossibleMoves();
+        startPiece.checkPossibleMoves(squares);
         sourceSquare.setEffect(null);
         switchTurn();
 

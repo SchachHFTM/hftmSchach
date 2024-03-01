@@ -91,7 +91,7 @@ public class Board extends GridPane {
         if (piece != null) {
             System.out.println("Selected" + piece.type);
 
-            ArrayList<String> possibleMoves = piece.checkPossibleMoves();
+            ArrayList<String> possibleMoves = piece.checkPossibleMoves(squares);
             for (String move : possibleMoves) {
                 for (Square possibleMove : squares) {
                     if (possibleMove.getName().equals(move)) {
@@ -108,8 +108,9 @@ public class Board extends GridPane {
     }
 
     private void handleSquareClick(Square square) {
+        System.out.println(square.name);
         if (selectedPiece != null && selectedSquare != null) {
-            ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves();
+            ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves(squares);
             if (possibleMoves.contains(square.getName())) {
                 game.movePiece(selectedSquare, square, squares);
                 selectedPiece.setEffect(null);

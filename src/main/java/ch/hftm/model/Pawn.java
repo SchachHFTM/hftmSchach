@@ -3,6 +3,7 @@ package ch.hftm.model;
 import java.util.ArrayList;
 
 import ch.hftm.Coordinates;
+import ch.hftm.Square;
 
 public class Pawn extends Piece {
 
@@ -14,41 +15,39 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public ArrayList<String> checkPossibleMoves() {
-        int x = this.x;
-        int y = this.y;
-        this.possibleMoves = new ArrayList<>();
+    public ArrayList<String> checkPossibleMoves(ArrayList<Square> squares) {
+        ArrayList<String> possibleMoves = new ArrayList<>();
 
-        int direction = (color == EColorPiece.BLACK) ? 1 : -1;
+        int direction = (getColor() == EColorPiece.WHITE) ? 1 : -1;
 
-        // Check one square forward
-        String forwardMove = Coordinates.fromCoordinatesToNotation(x, y - direction);
-        if (getSquareByName(forwardMove) != null && !getSquareByName(forwardMove).occupied) {
-            possibleMoves.add(forwardMove);
+        // Forward move
+        int forwardX = x;
+        int forwardY = y + direction;
+        Square forwardSquare = getSquareByName(Coordinates.convertToNotation(forwardX, forwardY), squares);
+        if (forwardSquare != null && !forwardSquare.occupied) {
+            possibleMoves.add(forwardSquare.getName());
+        }
 
-            // Check two squares forward if pawn is in starting position
-            if ((color == EColorPiece.BLACK && y == 6) || (color == EColorPiece.WHITE && y == 1)) {
-                String doubleForwardMove = Coordinates.fromCoordinatesToNotation(x, y - 2 * direction);
-                if (getSquareByName(doubleForwardMove) != null && !getSquareByName(doubleForwardMove).occupied) {
-                    possibleMoves.add(doubleForwardMove);
-                }
+        // Initial two-square move
+        if ((direction == 1 && y == 6) || (direction == -1 && y == 1)) {
+            int doubleForwardY = y + 2 * direction;
+            Square doubleForwardSquare = getSquareByName(Coordinates.convertToNotation(x, doubleForwardY), squares);
+            if (doubleForwardSquare != null && !doubleForwardSquare.occupied && !forwardSquare.occupied) {
+                possibleMoves.add(doubleForwardSquare.getName());
             }
         }
 
-        // Check diagonal captures
-        if (x + 1 < 8) {
-            String rightDiagonalMove = Coordinates.fromCoordinatesToNotation(x + 1, y - direction);
-            if (getSquareByName(rightDiagonalMove) != null && getSquareByName(rightDiagonalMove).occupied) {
-                possibleMoves.add(rightDiagonalMove);
+        // Diagonal capture
+        int[] captureX = { x - 1, x + 1 };
+        for (int x : captureX) {
+            int diagonalY = y + direction;
+            Square diagonalSquare = getSquareByName(Coordinates.convertToNotation(x, diagonalY), squares);
+            if (diagonalSquare != null && diagonalSquare.occupied
+                    && diagonalSquare.getPiece().getColor() != getColor()) {
+                possibleMoves.add(diagonalSquare.getName());
             }
         }
-        if (x - 1 >= 0) {
-            String leftDiagonalMove = Coordinates.fromCoordinatesToNotation(x - 1, y - direction);
-            if (getSquareByName(leftDiagonalMove) != null && getSquareByName(leftDiagonalMove).occupied) {
-                possibleMoves.add(leftDiagonalMove);
-            }
-        }
-        System.out.println(possibleMoves);
+
         return possibleMoves;
     }
 

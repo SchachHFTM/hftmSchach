@@ -15,7 +15,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public ArrayList<String> checkPossibleMoves() {
+    public ArrayList<String> checkPossibleMoves(ArrayList<Square> squares) {
         this.possibleMoves = new ArrayList<>();
 
         int[][] rookMoves = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
@@ -32,8 +32,7 @@ public class Rook extends Piece {
                     break;
                 }
 
-                Square square = getSquareByName(Coordinates.fromCoordinatesToNotation(newX, newY));
-
+                Square square = getSquareByName(Coordinates.fromCoordinatesToNotation(newX, newY), squares);
                 if (square.occupied) {
                     if (isOpponentPiece(newX, newY)) {
                         possibleMoves.add(Coordinates.fromCoordinatesToNotation(newX, newY));
@@ -46,17 +45,5 @@ public class Rook extends Piece {
             }
         }
         return possibleMoves;
-    }
-
-    private boolean isValidPosition(int x, int y) {
-        return x >= 0 && x < 8 && y >= 0 && y < 8;
-    }
-
-    private boolean isOpponentPiece(int x, int y) {
-        Piece piece = getPieceByName(Coordinates.fromCoordinatesToNotation(x, y));
-        if (piece != null) {
-            return piece.getColor() != this.getColor();
-        }
-        return false;
     }
 }

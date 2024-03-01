@@ -3,6 +3,7 @@ package ch.hftm.model;
 import java.util.ArrayList;
 
 import ch.hftm.Coordinates;
+import ch.hftm.Square;
 
 public class King extends Piece {
     // Constructor
@@ -44,24 +45,26 @@ public class King extends Piece {
      */
 
     @Override
-    public ArrayList<String> checkPossibleMoves() {
-        this.possibleMoves = new ArrayList<>();
+    public ArrayList<String> checkPossibleMoves(ArrayList<Square> squares) {
+        ArrayList<String> possibleMoves = new ArrayList<>();
 
-        int[][] kingMoves = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }, { 1, 1 }, { -1, -1 }, { 1, -1 }, { -1, 1 } };
+        int[][] kingMoves = {
+                { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 },
+                { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 }
+        };
 
         for (int[] move : kingMoves) {
-            int newX = x + move[0];
-            int newY = y + move[1];
+            int dx = move[0];
+            int dy = move[1];
+            int newX = x + dx;
+            int newY = y + dy;
 
-            if (isValidPosition(newX, newY)) {
-                possibleMoves.add(Coordinates.fromCoordinatesToNotation(newX, newY));
+            Square targetSquare = getSquareByName(Coordinates.convertToNotation(newX, newY), squares);
+            if (targetSquare != null && (isOpponentPiece(newX, newY) || !targetSquare.occupied)) {
+                possibleMoves.add(targetSquare.getName());
             }
         }
+
         return possibleMoves;
     }
-
-    private boolean isValidPosition(int x, int y) {
-        return x >= 0 && x < 8 && y >= 0 && y < 8;
-    }
-
 }

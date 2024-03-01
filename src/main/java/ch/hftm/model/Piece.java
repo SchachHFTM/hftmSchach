@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ch.hftm.Coordinates;
 import ch.hftm.Square;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -60,17 +61,14 @@ public abstract class Piece extends ImageView implements Serializable {
         return y;
     }
 
-    public Square getSquareByName(String name) {
+    public Square getSquareByName(String name, ArrayList<Square> squares) {
+        for (Square square : squares) {
+            if (square.getName().equals(name)) {
+                return square;
+            }
+        }
 
-        // TODO: Richtig implementieren
-        /*
-         * for (Square square : GameController) {
-         * if (square.name.equals(name)) {
-         * return square;
-         * }
-         * }
-         */
-        return new Square(1, 1);
+        return null;
     }
 
     public Piece getPieceByName(String name) {
@@ -88,8 +86,19 @@ public abstract class Piece extends ImageView implements Serializable {
         return test;
     }
 
-    public ArrayList<String> checkPossibleMoves() {
+    public ArrayList<String> checkPossibleMoves(ArrayList<Square> squares) {
         return possibleMoves;
     }
 
+    public boolean isOpponentPiece(int x, int y) {
+        Piece piece = getPieceByName(Coordinates.fromCoordinatesToNotation(x, y));
+        if (piece != null) {
+            return piece.getColor() != this.getColor();
+        }
+        return false;
+    }
+
+    public boolean isValidPosition(int x, int y) {
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
+    }
 }

@@ -15,61 +15,48 @@ public class Queen extends Piece {
     }
 
     @Override
-    public ArrayList<String> checkPossibleMoves() {
-        int x = this.x;
-        int y = this.y;
-        this.possibleMoves = new ArrayList<>();
-        // TODO Aktueller Spiele Implementieren und diese Attribut loschen oder ersetzen
-        String currentPlayer = "Withe";
+    public ArrayList<String> checkPossibleMoves(ArrayList<Square> squares) {
+        ArrayList<String> possibleMoves = new ArrayList<>();
 
-        int[] xHorizontal = { -1, 1, 0, 0 }; // horizontal directions
-        int[] yVertical = { 0, 0, -1, 1 }; // vertical directions.
-        int[] xDiagonal = { -1, -1, 1, 1 }; // x Diagnoal directions
-        int[] yDiagonal = { -1, 1, -1, 1 }; // y Diagonal directions
-        // Iterate through each direction (left, right, up, down)
-        for (int direction = 0; direction < 4; direction++) {
-            // Move along the current direction
-            for (int nextX = x + xHorizontal[direction], nextY = y + yVertical[direction]; nextX >= 0 && nextX < 8
-                    && nextY >= 0
-                    && nextY < 8; nextX += xHorizontal[direction], nextY += yVertical[direction]) {
-                String squareName = Coordinates.fromCoordinatesToNotation(nextX, nextY);
-                Square currentSquare = getSquareByName(squareName);
-                // Check if the square is occupied
-                if (currentSquare.occupied) {
-                    Piece piece = getPieceByName(squareName);
-                    // If the square is occupied by an opponent's piece, it can be attacked
-                    if (!piece.getColor().equals(currentPlayer)) {
-                        possibleMoves.add(squareName);
-                    }
-                    break; // Regardless of whether it's a friend or foe, stop the loop
+        // Define the directions in which a queen can move: horizontally, vertically,
+        // and diagonally
+        int[][] directions = {
+                { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 }, // Horizontal and vertical
+                { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 } // Diagonal
+        };
+
+        // Iterate over all possible directions
+        for (int[] direction : directions) {
+            int dx = direction[0];
+            int dy = direction[1];
+
+            // Iterate over the squares in the direction until we reach the board edge or an
+            // occupied square
+            for (int i = 1; i < 8; i++) {
+                int newX = x + dx * i;
+                int newY = y + dy * i;
+
+                // Check if the new position is valid and on the board
+                if (!isValidPosition(newX, newY)) {
+                    break;
                 }
 
-                // If the square is not occupied, it can be entered
-                possibleMoves.add(squareName);
+                // Check if the square at the new position is occupied
+                Square square = getSquareByName(Coordinates.fromCoordinatesToNotation(newX, newY), squares);
+                if (square != null) {
+                    // If the square is occupied by an opponent's piece, add it to possible moves
+                    if (isOpponentPiece(newX, newY)) {
+                        possibleMoves.add(square.getName());
+                    }
+                    // Break the loop because we can't move past an occupied square
+                    break;
+                }
+
+                // If the square is not occupied, add it to possible moves
+                possibleMoves.add(Coordinates.fromCoordinatesToNotation(newX, newY));
             }
         }
 
-        for (int direction = 0; direction < 4; direction++) {
-            // Move along the current direction
-            for (int nextX = x + xDiagonal[direction], nextY = y + yDiagonal[direction]; nextX >= 0 && nextX < 8
-                    && nextY >= 0
-                    && nextY < 8; nextX += xDiagonal[direction], nextY += yDiagonal[direction]) {
-                String squareName = Coordinates.fromCoordinatesToNotation(nextX, nextY);
-                Square currentSquare = getSquareByName(squareName);
-                // Check if the square is occupied
-                if (currentSquare.occupied) {
-                    Piece piece = getPieceByName(squareName);
-                    // If the square is occupied by an opponent's piece, it can be attacked
-                    if (!piece.getColor().equals(currentPlayer)) {
-                        possibleMoves.add(squareName);
-                    }
-                    break; // Regardless of whether it's a friend or foe, stop the loop
-                }
-
-                // If the square is not occupied, it can be entered
-                possibleMoves.add(squareName);
-            }
-        }
         return possibleMoves;
     }
 
