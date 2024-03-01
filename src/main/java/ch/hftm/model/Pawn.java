@@ -27,9 +27,9 @@ public class Pawn extends Piece {
         if (forwardSquare != null && !forwardSquare.occupied) {
             possibleMoves.add(forwardSquare.getName());
         }
-
+        System.out.println(y);
         // Initial two-square move
-        if ((direction == 1 && y == 6) || (direction == -1 && y == 1)) {
+        if ((direction == 1 && y == 1) || (direction == -1 && y == 6)) {
             int doubleForwardY = y + 2 * direction;
             Square doubleForwardSquare = getSquareByName(Coordinates.convertToNotation(x, doubleForwardY), squares);
             if (doubleForwardSquare != null && !doubleForwardSquare.occupied && !forwardSquare.occupied) {
