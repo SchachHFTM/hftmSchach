@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import ch.hftm.control.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -59,20 +60,30 @@ public class GameController {
         this.stage = stage;
     }
 
-    // This method is started with the "New Game" button. It loads a default new game.
+    // This method is started with the "New Game" button. It loads a default new
+    // game.
     @FXML
     public void creatAboard() {
-        cb = new Board(gridPaneBoard);
+        Game game = new Game();
+        cb = new Board(gridPaneBoard, game);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
+
+    }
+
+    public void loadABoard(SaveGame saveGame) {
+        Game game = new Game();
+        cb = new Board(gridPaneBoard, saveGame, game);
         textFieldPlayer1.setText("White Player");
         textFieldPlayer2.setText("Black Player");
     }
 
-    // This method is triggered in the LoadGame mehtode and creates a new board with the transferred savegame
+    // This method is triggered in the LoadGame mehtode and creates a new board with
+    // the transferred savegame
     @FXML
     public void loadAboard(SaveGame saveGame) {
-        cb = new Board(gridPaneBoard, saveGame);
+        Game game = new Game();
+        cb = new Board(gridPaneBoard, saveGame, game);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
         textFieldPlayer1.setText(cb.currentGame.getPlayerNameWhite());
@@ -80,15 +91,17 @@ public class GameController {
 
     }
 
-    ///This method is used by the restart button and is just a backup to make sure you don't accidentally reset the game.
+    /// This method is used by the restart button and is just a backup to make sure
+    /// you don't accidentally reset the game.
     @FXML
     public void newGamebuttonVisible() {
         newGameButton.setDisable(false);
         restartButten.setDisable(true);
     }
 
-    //the SaveGame method. Saves the current SaveGame class in a serializable file To do this,first open a Filechosser menu to define the path and file name. 
-    //Then the SaveGame class is saved there
+    // the SaveGame method. Saves the current SaveGame class in a serializable file
+    // To do this,first open a Filechosser menu to define the path and file name.
+    // Then the SaveGame class is saved there
     @FXML
     private void saveGame() throws IOException {
         try {
@@ -133,8 +146,10 @@ public class GameController {
         }
     }
 
-    //the loadGame method.Loads a SaveGame class from  a serializable file.First a Filechosser menu is opened to get the path and file.
-    //Then the SaveGame class is given to the LoadAboard() method to load the game board
+    // the loadGame method.Loads a SaveGame class from a serializable file.First a
+    // Filechosser menu is opened to get the path and file.
+    // Then the SaveGame class is given to the LoadAboard() method to load the game
+    // board
 
     @FXML
     private void loadGame() throws IOException {
@@ -164,8 +179,10 @@ public class GameController {
         }
     }
 
-    // This 2 Method Save the GamePlayer name Direkt in to the SaveGame Classe. But is cb is null. Than save the NAme in a Temp Variable oft the GameController.
-    // By the SaveGame Methode, we Check is the TempVariabl != Null. it's that true. WE Save this TemVariable Name in the SaveGame class
+    // This 2 Method Save the GamePlayer name Direkt in to the SaveGame Classe. But
+    // is cb is null. Than save the NAme in a Temp Variable oft the GameController.
+    // By the SaveGame Methode, we Check is the TempVariabl != Null. it's that true.
+    // WE Save this TemVariable Name in the SaveGame class
 
     @FXML
     private void SaveOrEditNameWhite() throws IOException {

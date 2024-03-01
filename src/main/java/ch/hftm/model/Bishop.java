@@ -7,18 +7,19 @@ import ch.hftm.Square;
 
 public class Bishop extends Piece {
 
-    //Constructor
+    // Constructor
     public Bishop(EColorPiece color, int x, int y) {
         super(color, x, y);
         this.type = "Bishop";
 
     }
 
-    public void checkPossibleMoves() {
+    @Override
+    public ArrayList<String> checkPossibleMoves() {
         int x = this.x;
         int y = this.y;
         this.possibleMoves = new ArrayList<>();
-        //TODO Aktueller Spiele Implementieren und diese Attribut loschen oder ersetzen
+        // TODO Aktueller Spiele Implementieren und diese Attribut loschen oder ersetzen
         String currentPlayer = "Withe";
 
         int[] xDiagonal = { -1, -1, 1, 1 }; // x Diagnoal directions
@@ -45,6 +46,7 @@ public class Bishop extends Piece {
                 possibleMoves.add(squareName);
             }
         }
+        return possibleMoves;
     }
 
 }

@@ -7,18 +7,19 @@ import ch.hftm.Square;
 
 public class Queen extends Piece {
 
-    //Constructor
+    // Constructor
     public Queen(EColorPiece color, int x, int y) {
         super(color, x, y);
         this.type = "Queen";
 
     }
 
-    public void checkPossibleMoves() {
+    @Override
+    public ArrayList<String> checkPossibleMoves() {
         int x = this.x;
         int y = this.y;
         this.possibleMoves = new ArrayList<>();
-        //TODO Aktueller Spiele Implementieren und diese Attribut loschen oder ersetzen
+        // TODO Aktueller Spiele Implementieren und diese Attribut loschen oder ersetzen
         String currentPlayer = "Withe";
 
         int[] xHorizontal = { -1, 1, 0, 0 }; // horizontal directions
@@ -69,6 +70,7 @@ public class Queen extends Piece {
                 possibleMoves.add(squareName);
             }
         }
+        return possibleMoves;
     }
 
 }

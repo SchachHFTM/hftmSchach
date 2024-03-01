@@ -5,27 +5,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import ch.hftm.Square;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 public abstract class Piece extends ImageView implements Serializable {
     protected EColorPiece color;
     public String type;
     public int x;
     public int y;
-    ArrayList<String> possibleMoves;
+    public ArrayList<String> possibleMoves;
 
-    //Constructor
+    // Constructor
     public Piece(EColorPiece color, int x, int y) {
         this.color = color;
         this.x = x;
         this.y = y;
-        addEventHandler();
     }
 
-    //Getter and Setter
+    // Getter and Setter
     public void setPiece(Image image) {
         this.setImage(image);
     }
@@ -79,11 +76,11 @@ public abstract class Piece extends ImageView implements Serializable {
     public Piece getPieceByName(String name) {
         // TODO: Richtig implementieren
         // for (Square square : Game.cb.squares) {
-        //     if (square.getChildren().size() == 0)
-        //         continue;
+        // if (square.getChildren().size() == 0)
+        // continue;
 
-        //     if (square.name.equals(name))
-        //         return (Piece) square.getChildren().get(0);
+        // if (square.name.equals(name))
+        // return (Piece) square.getChildren().get(0);
 
         // }
         // return null;
@@ -91,18 +88,8 @@ public abstract class Piece extends ImageView implements Serializable {
         return test;
     }
 
-    //Methoden
-
-    private void addEventHandler() {
-        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                checkPossibleMoves();
-            }
-        });
-    }
-
-    public void checkPossibleMoves() {
+    public ArrayList<String> checkPossibleMoves() {
+        return possibleMoves;
     }
 
 }

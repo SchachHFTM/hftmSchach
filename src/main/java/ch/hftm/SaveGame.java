@@ -26,7 +26,7 @@ public class SaveGame implements Serializable {
     // private Timer PlattimePlayerWhite;
     // private Timer PlattimePlayerBlack;
 
-    //TODO konzept überdenken start und laden
+    // TODO konzept überdenken start und laden
 
     public SaveGame(Piece[][] piecesPosition) {
         this.piecesPosition = piecesPosition;
@@ -36,7 +36,7 @@ public class SaveGame implements Serializable {
 
     }
 
-    //Getter and Setter
+    // Getter and Setter
 
     public Piece[][] getPiecesPosition() {
         return piecesPosition;
@@ -75,19 +75,19 @@ public class SaveGame implements Serializable {
     }
 
     // public Timer getPlattimePlayerWhite() {
-    //     return PlattimePlayerWhite;
+    // return PlattimePlayerWhite;
     // }
 
     // public void setPlattimePlayerWhite(Timer plattimePlayerWhite) {
-    //     PlattimePlayerWhite = plattimePlayerWhite;
+    // PlattimePlayerWhite = plattimePlayerWhite;
     // }
 
     // public Timer getPlattimePlayerBlack() {
-    //     return PlattimePlayerBlack;
+    // return PlattimePlayerBlack;
     // }
 
     // public void setPlattimePlayerBlack(Timer plattimePlayerBlack) {
-    //     PlattimePlayerBlack = plattimePlayerBlack;
+    // PlattimePlayerBlack = plattimePlayerBlack;
     // }
 
     private Piece[][] startPiecesPos() {
