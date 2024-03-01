@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ch.hftm.control.Game;
 import ch.hftm.model.Piece;
 import javafx.fxml.FXML;
+import javafx.scene.effect.Glow;
 import javafx.scene.layout.GridPane;
 
 public class Board extends GridPane {
@@ -89,6 +90,16 @@ public class Board extends GridPane {
         Piece piece = square.getPiece();
         if (piece != null) {
             System.out.println("Selected" + piece.type);
+
+            ArrayList<String> possibleMoves = piece.checkPossibleMoves();
+            for (String move : possibleMoves) {
+                for (Square possibleMove : squares) {
+                    if (possibleMove.getName().equals(move)) {
+                        possibleMove.setEffect(new Glow(0.6));
+                    }
+                }
+            }
+            piece.setEffect(new Glow(0.8));
             selectedPiece = piece;
             selectedSquare = square;
             updateEventHandlers();
@@ -101,6 +112,14 @@ public class Board extends GridPane {
             ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves();
             if (possibleMoves.contains(square.getName())) {
                 game.movePiece(selectedSquare, square, squares);
+                selectedPiece.setEffect(null);
+                for (String move : possibleMoves) {
+                    for (Square possibleMove : squares) {
+                        if (possibleMove.getName().equals(move)) {
+                            possibleMove.setEffect(null);
+                        }
+                    }
+                }
                 selectedPiece = null;
                 selectedSquare = null;
                 updateEventHandlers();

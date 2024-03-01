@@ -61,6 +61,7 @@ public class Game {
         destinationSquare.occupied = true;
 
         startPiece.checkPossibleMoves();
+        sourceSquare.setEffect(null);
         switchTurn();
 
         return true;
