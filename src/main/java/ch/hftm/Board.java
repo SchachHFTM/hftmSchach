@@ -3,6 +3,7 @@ package ch.hftm;
 import java.util.ArrayList;
 
 import ch.hftm.control.Game;
+import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
 import javafx.fxml.FXML;
 import javafx.scene.effect.Glow;
@@ -91,6 +92,10 @@ public class Board extends GridPane {
         if (piece != null) {
             System.out.println("Selected" + piece.type);
 
+            boolean isWhitePiece = piece.getColor() == EColorPiece.WHITE;
+            if ((isWhitePiece && !game.whiteTurn) || (!isWhitePiece && game.whiteTurn)) {
+                return;
+            }
             ArrayList<String> possibleMoves = piece.checkPossibleMoves(squares);
             for (String move : possibleMoves) {
                 for (Square possibleMove : squares) {

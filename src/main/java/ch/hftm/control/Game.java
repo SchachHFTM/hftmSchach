@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class Game {
-    private boolean whiteTurn;
+    public boolean whiteTurn;
 
     public Game() {
         whiteTurn = true;

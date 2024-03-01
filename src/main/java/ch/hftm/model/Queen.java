@@ -43,7 +43,7 @@ public class Queen extends Piece {
 
                 // Check if the square at the new position is occupied
                 Square square = getSquareByName(Coordinates.fromCoordinatesToNotation(newX, newY), squares);
-                if (square != null) {
+                if (square.occupied) {
                     // If the square is occupied by an opponent's piece, add it to possible moves
                     if (isOpponentPiece(newX, newY)) {
                         possibleMoves.add(square.getName());
