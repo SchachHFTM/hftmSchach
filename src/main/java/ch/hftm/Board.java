@@ -96,6 +96,7 @@ public class Board extends GridPane {
             if ((isWhitePiece && !game.whiteTurn) || (!isWhitePiece && game.whiteTurn)) {
                 return;
             }
+
             ArrayList<String> possibleMoves = piece.checkPossibleMoves(squares);
             for (String move : possibleMoves) {
                 for (Square possibleMove : squares) {
@@ -108,7 +109,6 @@ public class Board extends GridPane {
             selectedPiece = piece;
             selectedSquare = square;
             updateEventHandlers();
-        } else {
         }
     }
 
@@ -118,7 +118,6 @@ public class Board extends GridPane {
             ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves(squares);
             if (possibleMoves.contains(square.getName())) {
                 game.movePiece(selectedSquare, square, squares);
-                selectedPiece.setEffect(null);
                 for (String move : possibleMoves) {
                     for (Square possibleMove : squares) {
                         if (possibleMove.getName().equals(move)) {
@@ -126,11 +125,12 @@ public class Board extends GridPane {
                         }
                     }
                 }
-                selectedPiece = null;
-                selectedSquare = null;
-                updateEventHandlers();
-            } else {
             }
+            selectedSquare.setEffect(null);
+            selectedPiece.setEffect(null);
+            selectedPiece = null;
+            selectedSquare = null;
+            updateEventHandlers();
         }
     }
 }

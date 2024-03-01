@@ -2,6 +2,7 @@ package ch.hftm.control;
 
 import java.util.ArrayList;
 
+import ch.hftm.GameController;
 import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
@@ -10,9 +11,21 @@ import javafx.scene.layout.Pane;
 
 public class Game {
     public boolean whiteTurn;
+    public int whiteRemainingMinutes;
+    public int blackRemainingMinutes;
+    private GameController gameController;
 
-    public Game() {
+    public Game(GameController gameController) {
+        this.gameController = gameController;
         whiteTurn = true;
+    }
+
+    public void startGame() {
+        whiteRemainingMinutes = 10;
+        blackRemainingMinutes = 10;
+
+        gameController.startTimerThread(true);
+        gameController.startTimerThread(false);
     }
 
     public boolean isWhiteTurn() {
@@ -60,7 +73,6 @@ public class Game {
         destinationSquare.occupied = true;
 
         startPiece.checkPossibleMoves(squares);
-        sourceSquare.setEffect(null);
         switchTurn();
 
         return true;
