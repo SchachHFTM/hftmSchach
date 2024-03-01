@@ -33,7 +33,7 @@ public class Bishop extends Piece {
                 Square targetSquare = getSquareByName(Coordinates.convertToNotation(newX, newY), squares);
                 if (!targetSquare.occupied) {
                     possibleMoves.add(targetSquare.getName());
-                } else if (isOpponentPiece(newX, newY)) {
+                } else if (isOpponentPiece(newX, newY, squares)) {
                     possibleMoves.add(targetSquare.getName());
                     break;
                 } else {

@@ -34,7 +34,7 @@ public class Rook extends Piece {
 
                 Square square = getSquareByName(Coordinates.fromCoordinatesToNotation(newX, newY), squares);
                 if (square.occupied) {
-                    if (isOpponentPiece(newX, newY)) {
+                    if (isOpponentPiece(newX, newY, squares)) {
                         possibleMoves.add(square.getName());
                     }
                     break;

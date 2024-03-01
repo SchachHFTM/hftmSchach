@@ -58,7 +58,8 @@ public class Knight extends Piece {
             int newY = y + dy;
 
             Square targetSquare = getSquareByName(Coordinates.convertToNotation(newX, newY), squares);
-            if (targetSquare != null && (isOpponentPiece(newX, newY) || !targetSquare.occupied)) {
+
+            if (targetSquare != null && (!targetSquare.occupied || isOpponentPiece(newX, newY, squares))) {
                 possibleMoves.add(targetSquare.getName());
             }
         }
