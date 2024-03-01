@@ -64,14 +64,16 @@ public class GameController {
     // game.
     @FXML
     public void creatAboard() {
-        cb = new Board(gridPaneBoard);
+        Game game = new Game();
+        cb = new Board(gridPaneBoard, game);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
 
     }
 
     public void loadABoard(SaveGame saveGame) {
-        cb = new Board(gridPaneBoard, saveGame);
+        Game game = new Game();
+        cb = new Board(gridPaneBoard, saveGame, game);
         textFieldPlayer1.setText("White Player");
         textFieldPlayer2.setText("Black Player");
     }
@@ -80,7 +82,8 @@ public class GameController {
     // the transferred savegame
     @FXML
     public void loadAboard(SaveGame saveGame) {
-        cb = new Board(gridPaneBoard, saveGame);
+        Game game = new Game();
+        cb = new Board(gridPaneBoard, saveGame, game);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
         textFieldPlayer1.setText(cb.currentGame.getPlayerNameWhite());

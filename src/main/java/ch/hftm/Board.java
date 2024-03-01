@@ -17,15 +17,17 @@ public class Board extends GridPane {
     private Square selectedSquare;
     private Piece selectedPiece;
 
-    public Board(GridPane board, SaveGame currentGameFromSave) {
+    public Board(GridPane board, SaveGame currentGameFromSave, Game game) {
         this.board = board;
+        this.game = game;
         initializeBoard(this.board);
         setPiecesOnBoard(currentGameFromSave.piecesPosition);
         currentGame = currentGameFromSave;
     }
 
-    public Board(GridPane board) {
+    public Board(GridPane board, Game game) {
         this.board = board;
+        this.game = game;
         initializeBoard(this.board);
         currentGame.setNewGamePiecesPosition();
         setPiecesOnBoard(currentGame.piecesPosition);
@@ -98,40 +100,12 @@ public class Board extends GridPane {
         if (selectedPiece != null && selectedSquare != null) {
             ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves();
             if (possibleMoves.contains(square.getName())) {
-                movePiece(selectedSquare, square);
+                game.movePiece(selectedSquare, square, squares);
                 selectedPiece = null;
                 selectedSquare = null;
                 updateEventHandlers();
             } else {
             }
         }
-    }
-
-    private void movePiece(Square sourceSquare, Square destinationSquare) {
-        // Retrieve the Piece from the source square
-        Piece piece = sourceSquare.getPiece();
-
-        // Get the row and column indices of the destination square
-        int destRow = GridPane.getRowIndex(destinationSquare);
-        int destCol = GridPane.getColumnIndex(destinationSquare);
-
-        // Update the x and y coordinates of the piece
-        piece.x = destCol;
-        piece.y = destRow;
-
-        // Remove the piece from its current position
-        sourceSquare.getChildren().remove(piece);
-        sourceSquare.setPiece(null); // Clear the piece from the source square
-        sourceSquare.occupied = false; // Update the occupied status
-
-        // Add the piece to the destination square
-        GridPane.setColumnIndex(piece, destCol);
-        GridPane.setRowIndex(piece, destRow);
-        destinationSquare.getChildren().add(piece);
-        destinationSquare.setPiece(piece); // Set the piece on the destination square
-        destinationSquare.occupied = true; // Update the occupied status
-
-        // Update possible moves after moving the piece
-        piece.checkPossibleMoves();
     }
 }

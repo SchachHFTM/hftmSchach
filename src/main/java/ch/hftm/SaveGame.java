@@ -27,14 +27,28 @@ public class SaveGame implements Serializable {
     // private Timer PlattimePlayerBlack;
 
     // TODO konzept überdenken start und laden
+
+    public SaveGame(Piece[][] piecesPosition) {
+        this.piecesPosition = piecesPosition;
+    }
+
     public SaveGame() {
+
+    }
+
+    // Getter and Setter
+
+    public Piece[][] getPiecesPosition() {
+        return piecesPosition;
+    }
+
+    public void setPiecesPosition(Piece[][] piecesPosition) {
+        this.piecesPosition = piecesPosition;
     }
 
     public void setNewGamePiecesPosition() {
-        this.piecesPosition = initializingStartingPieces();
+        this.piecesPosition = startPiecesPos();
     }
-
-    private Piece[][] initializingStartingPieces() {
 
     public Boolean getCurrentPlayer() {
         return CurrentPlayer;
@@ -119,4 +133,5 @@ public class SaveGame implements Serializable {
 
         return startingPosition;
     }
+
 }

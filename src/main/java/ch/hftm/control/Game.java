@@ -6,39 +6,73 @@ import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class Game {
     private Piece[][] board;
     private boolean whiteTurn;
 
-    public Piece[][] getBoard() {
-        return board;
+    public Game() {
+        whiteTurn = true;
     }
 
-    public Game(GridPane chessBoard, String theme) {
+    public boolean isWhiteTurn() {
+        return whiteTurn;
     }
 
-    public boolean movePiece(int startX, int startY, int endX, int endY) {
-        Piece startPiece = board[startX][startY];
-        if (startPiece == null || startPiece.getColor() != EColorPiece.WHITE) {
-            // No piece at the starting position or it's not the player's turn
+    public void switchTurn() {
+        whiteTurn = !whiteTurn;
+    }
+
+    public boolean movePiece(Square sourceSquare, Square destinationSquare, ArrayList<Square> squares) {
+        Piece startPiece = sourceSquare.getPiece();
+
+        boolean isWhitePiece = startPiece.getColor() == EColorPiece.WHITE;
+        if ((isWhitePiece && !whiteTurn) || (!isWhitePiece && whiteTurn)) {
             return false;
         }
 
-        ArrayList<String> possibleMoves = startPiece.possibleMoves;
-        Square destination = new Square(endX, endY);
-        if (!possibleMoves.contains(destination)) {
+        int destRow = GridPane.getRowIndex(destinationSquare);
+        int destCol = GridPane.getColumnIndex(destinationSquare);
+
+        Piece occupyingPiece = destinationSquare.getPiece();
+        if (destinationSquare.occupied && occupyingPiece.getColor() == startPiece.getColor()) {
             return false;
         }
+
+        if (occupyingPiece != null) {
+            capturePiece(occupyingPiece, startPiece);
+            if (occupyingPiece.type.equals("King")) {
+                System.out.println("Schach-Matt");
+            }
+        }
+
+        startPiece.x = destCol;
+        startPiece.y = destRow;
+
+        sourceSquare.getChildren().remove(startPiece);
+        sourceSquare.setPiece(null);
+        sourceSquare.occupied = false;
+
+        GridPane.setColumnIndex(startPiece, destCol);
+        GridPane.setRowIndex(startPiece, destRow);
+        destinationSquare.getChildren().add(startPiece);
+        destinationSquare.setPiece(startPiece);
+        destinationSquare.occupied = true;
+
+        startPiece.checkPossibleMoves();
+        switchTurn();
+
         return true;
     }
 
-    // TODO: SELECT the pieces to move
-    public Piece selectPiece(int startX, int startY) {
-        Piece startPiece = board[startX][startY];
-        return startPiece;
+    public boolean capturePiece(Piece endPiece, Piece startPiece) {
+        if (startPiece.getColor() != endPiece.getColor()) {
+            Pane parentPane = (Pane) endPiece.getParent();
+            parentPane.getChildren().remove(endPiece);
+            return true;
+        } else {
+            return false;
+        }
     }
-    // TODO: DESELECT the piece to move
-
-    // TODO: Kill the piece to move
 }
