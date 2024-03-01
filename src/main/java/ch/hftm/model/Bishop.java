@@ -31,15 +31,12 @@ public class Bishop extends Piece {
 
             while (isValidPosition(newX, newY)) {
                 Square targetSquare = getSquareByName(Coordinates.convertToNotation(newX, newY), squares);
-                if (!targetSquare.occupied) {
-                    possibleMoves.add(targetSquare.getName());
-                } else if (isOpponentPiece(newX, newY)) {
-                    possibleMoves.add(targetSquare.getName());
-                    break;
-                } else {
+                if (targetSquare.occupied) {
+                    if (isOpponentPiece(newX, newY)) {
+                        possibleMoves.add(targetSquare.getName());
+                    }
                     break;
                 }
-
                 newX += dx;
                 newY += dy;
             }
