@@ -244,7 +244,7 @@ public class GameController {
 
             while (remainingMinutes > 0) {
                 try {
-                    Thread.sleep(60000);
+                    Thread.sleep(6000);
                     remainingMinutes--;
                     String remainingString = String.format("%02d:%02d", remainingMinutes / 60, remainingMinutes % 60);
                     System.out.println("Remaining Time: " + remainingString);
