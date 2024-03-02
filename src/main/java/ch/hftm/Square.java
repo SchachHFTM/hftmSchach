@@ -19,6 +19,7 @@ public class Square extends StackPane {
         this.occupied = false;
         this.name = Coordinates.fromCoordinatesToNo(x, y).getNotation();
         setMinSize(50, 50);
+
     }
 
     @Override

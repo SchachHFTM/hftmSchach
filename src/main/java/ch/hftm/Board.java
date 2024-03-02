@@ -6,16 +6,23 @@ import ch.hftm.control.Game;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.effect.Glow;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 public class Board extends GridPane {
 
     @FXML
     GridPane board;
-    public ArrayList<Square> squares = new ArrayList<>();
+    public static ArrayList<Square> squares = new ArrayList<>();
     public SaveGame currentGame = new SaveGame();
-    public Game game;
+    public static Game game;
     private Square selectedSquare;
     private Piece selectedPiece;
 
@@ -44,6 +51,9 @@ public class Board extends GridPane {
                 } else {
                     square.setStyle("-fx-background-color: #cd8c3f;");
                 }
+                square.setPadding(new Insets(1));
+                square.setBorder(new Border(new BorderStroke(Color.BLACK,
+                        BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 square.setOnMouseClicked(event -> handlePieceSelection(square));
                 board.add(square, col, row);
                 squares.add(square);
@@ -73,6 +83,7 @@ public class Board extends GridPane {
                 }
             }
         }
+        switchPlayerBoarder();
     }
 
     private void updateEventHandlers() {
@@ -88,6 +99,7 @@ public class Board extends GridPane {
     }
 
     private void handlePieceSelection(Square square) {
+
         Piece piece = square.getPiece();
         if (piece != null) {
             System.out.println("Selected" + piece.type);
@@ -108,11 +120,13 @@ public class Board extends GridPane {
             selectedPiece = piece;
             selectedSquare = square;
             updateEventHandlers();
+
         } else {
         }
     }
 
     private void handleSquareClick(Square square) {
+
         System.out.println(square.name);
         if (selectedPiece != null && selectedSquare != null) {
             ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves(squares);
@@ -132,5 +146,35 @@ public class Board extends GridPane {
             } else {
             }
         }
+    }
+
+    public static void switchPlayerBoarder() {
+        resetBorderWidth();
+        double currentBorderWidth = 1.5;
+        boolean currentPlayer = game.isWhiteTurn();
+        EColorPiece currentColor;
+        if (currentPlayer) {
+            currentColor = EColorPiece.WHITE;
+        } else {
+            currentColor = EColorPiece.BLACK;
+        }
+        for (Square square : squares) {
+            EColorPiece pieceColor = square.getPiece() != null ? square.getPiece().getColor() : null;
+            if (pieceColor == currentColor) {
+                setBorderWidth(currentBorderWidth, square);
+            }
+        }
+    }
+
+    public static void resetBorderWidth() {
+        for (Square square : squares) {
+
+            setBorderWidth(1, square); // Hier 0 setzen, um den Rahmen zu entfernen, oder eine andere Standarddicke verwenden
+        }
+    }
+
+    public static void setBorderWidth(double neueDicke, Square square) {
+        square.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(neueDicke))));
     }
 }
