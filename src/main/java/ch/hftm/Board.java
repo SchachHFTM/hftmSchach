@@ -66,7 +66,7 @@ public class Board extends GridPane {
                 if (x >= 0 && x < 8 && y >= 0 && y < 8) {
                     for (Square square : squares) {
                         if (square.x == x && square.y == y) {
-                            square.setPiece(pi); // Associate the piece with the square
+                            square.setPiece(pi);
                             addPiece(square, pi);
                         }
                     }
