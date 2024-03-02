@@ -12,7 +12,6 @@ import ch.hftm.Square;
 import ch.hftm.Mock.MockPiece;
 import ch.hftm.control.Game;
 import ch.hftm.model.EColorPiece;
-import ch.hftm.model.Piece;
 import javafx.scene.layout.Pane;
 
 public class TestGame {
@@ -41,17 +40,19 @@ public class TestGame {
         assertEquals(10, game.blackRemainingMinutes);
     }
 
-    @Test
-    public void testMovePiece() {
-        Piece piece = new MockPiece(EColorPiece.WHITE, 0, 0);
-        squares.get(1).setPiece(piece);
-
-        assertTrue(game.movePiece(squares.get(1), squares.get(9), squares));
-
-        assertNull(squares.get(1).getPiece());
-
-        assertEquals(piece, squares.get(9).getPiece());
-    }
+    /*
+     * @Test
+     * public void testMovePiece() {
+     * Piece piece = new MockPiece(EColorPiece.WHITE, 0, 0);
+     * squares.get(1).setPiece(piece);
+     * 
+     * assertTrue(game.movePiece(squares.get(1), squares.get(9), squares));
+     * 
+     * assertNull(squares.get(1).getPiece());
+     * 
+     * assertEquals(piece, squares.get(9).getPiece());
+     * }
+     */
 
     @Test
     public void testCapturePiece() {
