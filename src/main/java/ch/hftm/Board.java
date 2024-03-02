@@ -102,8 +102,6 @@ public class Board extends GridPane {
 
         Piece piece = square.getPiece();
         if (piece != null) {
-            System.out.println("Selected" + piece.type);
-
             boolean isWhitePiece = piece.getColor() == EColorPiece.WHITE;
             if ((isWhitePiece && !game.whiteTurn) || (!isWhitePiece && game.whiteTurn)) {
                 return;
@@ -125,8 +123,6 @@ public class Board extends GridPane {
     }
 
     private void handleSquareClick(Square square) {
-
-        System.out.println(square.name);
         if (selectedPiece != null && selectedSquare != null) {
             ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves(squares);
             if (possibleMoves.contains(square.getName())) {

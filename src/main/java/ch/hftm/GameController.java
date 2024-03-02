@@ -6,14 +6,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
 
 import ch.hftm.control.Game;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -50,13 +52,17 @@ public class GameController {
     private TextField textFieldPlayer2;
 
     @FXML
-    private Label timePlayer1;
-
-    @FXML
-    private Label timePlayer2;
-
-    @FXML
     private GridPane gridPaneBoard;
+
+    @FXML
+    public Text gameOver;
+
+    @FXML
+    public void showWonPlayer(String message) {
+        gameOver.setText(message);
+        gameOver.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        gameOver.setVisible(true);
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -68,18 +74,20 @@ public class GameController {
     public void creatAboard() {
         game = new Game(this);
         cb = new Board(gridPaneBoard, game);
-        game.startGame();
+        gameOver.setVisible(false);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
+        Game.logger.log(Level.INFO, "NEW GAME");
 
     }
 
     public void loadABoard(SaveGame saveGame) {
         game = new Game(this);
         cb = new Board(gridPaneBoard, saveGame, game);
-        game.startGame();
+        gameOver.setVisible(false);
         textFieldPlayer1.setText("White Player");
         textFieldPlayer2.setText("Black Player");
+
     }
 
     // This method is triggered in the LoadGame mehtode and creates a new board with
@@ -88,7 +96,7 @@ public class GameController {
     public void loadAboard(SaveGame saveGame) {
         game = new Game(this);
         cb = new Board(gridPaneBoard, saveGame, game);
-        game.startGame();
+        gameOver.setVisible(false);
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
         textFieldPlayer1.setText(cb.currentGame.getPlayerNameWhite());
@@ -133,6 +141,7 @@ public class GameController {
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(save);
             out.close();
+            Game.logger.log(Level.INFO, "SAVE GAME: " + selectedFile);
         } catch (NullPointerException e) {
 
             System.err.println("Error: cb is null. Unable to save game.");
@@ -176,6 +185,7 @@ public class GameController {
                 SaveGame load = (SaveGame) in.readObject();
 
                 loadAboard(load);
+                Game.logger.log(Level.INFO, "LOAD A GAME: " + selectedFile);
             } catch (Exception e) {
                 System.out.println(e.getClass().getName());
                 System.out.println(e.getMessage());
@@ -237,23 +247,4 @@ public class GameController {
         }
     }
 
-    public void startTimerThread(boolean isWhiteTurn) {
-        Thread timerThread = new Thread(() -> {
-            int remainingMinutes = isWhiteTurn ? game.whiteRemainingMinutes : game.blackRemainingMinutes;
-            Label timeLabel = isWhiteTurn ? timePlayer1 : timePlayer2;
-
-            while (remainingMinutes > 0) {
-                try {
-                    Thread.sleep(6000);
-                    remainingMinutes--;
-                    String remainingString = String.format("%02d:%02d", remainingMinutes / 60, remainingMinutes % 60);
-                    System.out.println("Remaining Time: " + remainingString);
-                    Platform.runLater(() -> timeLabel.setText(remainingString));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        timerThread.start();
-    }
 }

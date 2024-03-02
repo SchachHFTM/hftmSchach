@@ -1,6 +1,6 @@
 package ch.hftm.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -30,14 +30,6 @@ public class TestGame {
                 squares.add(new Square(i, j));
             }
         }
-    }
-
-    @Test
-    public void testStartGame() {
-        game.startGame();
-        assertTrue(game.isWhiteTurn());
-        assertEquals(10, game.whiteRemainingMinutes);
-        assertEquals(10, game.blackRemainingMinutes);
     }
 
     /*

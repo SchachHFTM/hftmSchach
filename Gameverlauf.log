@@ -1,0 +1,31 @@
+[2024-03-02 13:42:06] [WARNUNG] Loading FXML document with JavaFX API of version 19 by JavaFX runtime of version 17.0.6 
+[2024-03-02 13:42:08] [INFORMATION] NEW GAME 
+[2024-03-02 13:42:10] [INFORMATION] Moving WHITE Pawn from C2 to C4 
+[2024-03-02 13:42:12] [INFORMATION] Moving BLACK Pawn from D7 to D5 
+[2024-03-02 13:42:14] [INFORMATION] Moving WHITE Queen from D1 to A4 
+[2024-03-02 13:42:15] [INFORMATION] Moving BLACK King from E8 to D7 
+[2024-03-02 13:42:17] [INFORMATION] Moving WHITE Queen from A4 to D7 Capture Piece: King from Color: BLACK 
+[2024-03-02 13:42:17] [WARNUNG] SCHACH-MATT PLAYER WHITE HAVE WON 
+[2024-03-02 13:44:29] [WARNUNG] Loading FXML document with JavaFX API of version 19 by JavaFX runtime of version 17.0.6 
+[2024-03-02 13:44:31] [INFORMATION] NEW GAME 
+[2024-03-02 13:44:33] [INFORMATION] Moving WHITE Pawn from C2 to C4 
+[2024-03-02 13:44:35] [INFORMATION] Moving BLACK Pawn from C7 to C6 
+[2024-03-02 13:44:38] [INFORMATION] Moving WHITE Pawn from D2 to D4 
+[2024-03-02 13:44:41] [INFORMATION] Moving BLACK Pawn from D7 to D5 
+[2024-03-02 13:44:46] [INFORMATION] Moving WHITE Pawn from E2 to E4 
+[2024-03-02 13:44:48] [INFORMATION] Moving BLACK Pawn from E7 to E5 
+[2024-03-02 13:44:50] [INFORMATION] Moving WHITE King from E1 to E2 
+[2024-03-02 13:44:54] [INFORMATION] Moving BLACK Queen from D8 to G5 
+[2024-03-02 13:44:55] [INFORMATION] Moving WHITE King from E2 to E3 
+[2024-03-02 13:44:56] [INFORMATION] Moving BLACK Queen from G5 to E3 Capture Piece: King from Color: WHITE 
+[2024-03-02 13:44:56] [WARNUNG] SCHACH-MATT PLAYER BLACK HAVE WON 
+[2024-03-02 13:47:21] [WARNUNG] Loading FXML document with JavaFX API of version 19 by JavaFX runtime of version 17.0.6 
+[2024-03-02 13:47:23] [INFORMATION] NEW GAME 
+[2024-03-02 13:47:32] [INFORMATION] Moving WHITE Pawn from D2 to D4 
+[2024-03-02 13:47:33] [INFORMATION] Moving BLACK Pawn from C7 to C5 
+[2024-03-02 13:47:40] [INFORMATION] SAVE GAME: C:\DATEN_HFTM\Java Programme\OOP2\Projekt\hftmSchachNEU\hftmSchach\mySavedGame2.ser 
+[2024-03-02 13:47:43] [INFORMATION] NEW GAME 
+[2024-03-02 13:47:45] [INFORMATION] LOAD A GAME: C:\DATEN_HFTM\Java Programme\OOP2\Projekt\hftmSchachNEU\hftmSchach\mySavedGame2.ser 
+[2024-03-02 13:47:48] [INFORMATION] NEW GAME 
+[2024-03-02 13:47:49] [INFORMATION] LOAD A GAME: C:\DATEN_HFTM\Java Programme\OOP2\Projekt\hftmSchachNEU\hftmSchach\mySavedGame2.ser 
+[2024-03-02 13:47:57] [INFORMATION] Moving WHITE Pawn from D4 to C5 Capture Piece: Pawn from Color: BLACK 
