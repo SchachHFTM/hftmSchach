@@ -3,6 +3,7 @@ package ch.hftm.control;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import ch.hftm.Board;
 import ch.hftm.GameController;
 import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
@@ -34,7 +35,9 @@ public class Game {
     }
 
     public void switchTurn() {
+
         whiteTurn = !whiteTurn;
+        Board.switchPlayerBoarder();
     }
 
     public boolean movePiece(Square sourceSquare, Square destinationSquare, ArrayList<Square> squares) {
@@ -89,4 +92,5 @@ public class Game {
             return false;
         }
     }
+
 }
