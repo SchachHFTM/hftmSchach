@@ -1,4 +1,4 @@
-package ch.hftm;
+package ch.hftm.control;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 
-import ch.hftm.control.Game;
+import ch.hftm.App;
+import ch.hftm.Board;
+import ch.hftm.SaveGame;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

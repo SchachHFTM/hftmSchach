@@ -7,7 +7,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import ch.hftm.Board;
-import ch.hftm.GameController;
 import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;

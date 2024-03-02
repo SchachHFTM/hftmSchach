@@ -2,7 +2,6 @@ package ch.hftm;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.LogManager;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,13 +17,7 @@ public class App extends Application {
     private static Scene scene;
 
     public static void main(String[] args) {
-        try {
-            // Load the logging configuration from logging.properties
-            LogManager.getLogManager().readConfiguration(App.class.getResourceAsStream("/logging.properties"));
-        } catch (IOException e) {
-            System.err.println("Could not load logging configuration");
-            e.printStackTrace();
-        }
+
         launch();
     }
 
