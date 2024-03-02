@@ -118,6 +118,7 @@ public class GameController {
     // Then the SaveGame class is saved there
     @FXML
     private void saveGame() throws IOException {
+        ObjectOutputStream out = null;
         try {
             // Check if cb is null
             if (cb == null) {
@@ -139,9 +140,9 @@ public class GameController {
             fileChooser.setTitle("Save Game");
             File selectedFile = fileChooser.showSaveDialog(stage);
             FileOutputStream fileOut = new FileOutputStream(selectedFile);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out = new ObjectOutputStream(fileOut);
             out.writeObject(save);
-            out.close();
+
             Game.logger.log(Level.INFO, "SAVE GAME: " + selectedFile);
         } catch (NullPointerException e) {
 
@@ -158,6 +159,10 @@ public class GameController {
             System.err.println("Error: An unexpected error occurred while saving the game.");
             e.printStackTrace();
 
+        } finally {
+            if (out != null) {
+                out.close();
+            }
         }
     }
 
@@ -173,7 +178,8 @@ public class GameController {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(path));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Save Files", "*.ser"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Save Files", "*.ser"));
         fileChooser.setTitle("Load Game");
 
         File selectedFile = fileChooser.showOpenDialog(stage);
