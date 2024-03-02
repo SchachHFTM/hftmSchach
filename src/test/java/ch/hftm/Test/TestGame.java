@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ch.hftm.Square;
 import ch.hftm.Mock.MockPiece;
 import ch.hftm.control.Game;
 import ch.hftm.control.GameController;
 import ch.hftm.model.EColorPiece;
+import ch.hftm.model.Square;
 import javafx.scene.layout.Pane;
 
 public class TestGame {

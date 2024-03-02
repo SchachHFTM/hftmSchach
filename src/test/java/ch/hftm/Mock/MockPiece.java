@@ -2,9 +2,9 @@ package ch.hftm.Mock;
 
 import java.util.ArrayList;
 
-import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
+import ch.hftm.model.Square;
 
 public class MockPiece extends Piece {
 

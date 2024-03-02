@@ -1,4 +1,4 @@
-package ch.hftm;
+package ch.hftm.control;
 
 import java.io.Serializable;
 
@@ -18,15 +18,11 @@ It also has the startPiecesPos() and setNewGamePiecesPosition() to create a game
 
 public class SaveGame implements Serializable {
 
-    Piece[][] piecesPosition;
+    public Piece[][] piecesPosition;
 
     Boolean CurrentPlayer;
     private String PlayerNameWhite;
     private String PlayerNameBlack;
-    // private Timer PlattimePlayerWhite;
-    // private Timer PlattimePlayerBlack;
-
-    // TODO konzept überdenken start und laden
 
     public SaveGame(Piece[][] piecesPosition) {
         this.piecesPosition = piecesPosition;
@@ -73,22 +69,6 @@ public class SaveGame implements Serializable {
     public void setPlayerNameBlack(String playerNameBlack) {
         PlayerNameBlack = playerNameBlack;
     }
-
-    // public Timer getPlattimePlayerWhite() {
-    // return PlattimePlayerWhite;
-    // }
-
-    // public void setPlattimePlayerWhite(Timer plattimePlayerWhite) {
-    // PlattimePlayerWhite = plattimePlayerWhite;
-    // }
-
-    // public Timer getPlattimePlayerBlack() {
-    // return PlattimePlayerBlack;
-    // }
-
-    // public void setPlattimePlayerBlack(Timer plattimePlayerBlack) {
-    // PlattimePlayerBlack = plattimePlayerBlack;
-    // }
 
     private Piece[][] startPiecesPos() {
         Piece[][] startingPosition = new Piece[2][16];

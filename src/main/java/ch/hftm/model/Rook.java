@@ -3,7 +3,6 @@ package ch.hftm.model;
 import java.util.ArrayList;
 
 import ch.hftm.Coordinates;
-import ch.hftm.Square;
 
 public class Rook extends Piece {
 

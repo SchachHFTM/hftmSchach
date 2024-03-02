@@ -1,10 +1,9 @@
-package ch.hftm;
+package ch.hftm.model;
 
 import java.util.ArrayList;
 
 import ch.hftm.control.Game;
-import ch.hftm.model.EColorPiece;
-import ch.hftm.model.Piece;
+import ch.hftm.control.SaveGame;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.effect.Glow;

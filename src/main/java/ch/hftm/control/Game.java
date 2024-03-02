@@ -6,10 +6,10 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import ch.hftm.Board;
-import ch.hftm.Square;
+import ch.hftm.model.Board;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
+import ch.hftm.model.Square;
 import javafx.scene.layout.Pane;
 
 public class Game {

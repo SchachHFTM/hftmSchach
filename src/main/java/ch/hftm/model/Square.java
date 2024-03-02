@@ -1,6 +1,6 @@
-package ch.hftm;
+package ch.hftm.model;
 
-import ch.hftm.model.Piece;
+import ch.hftm.Coordinates;
 import javafx.scene.layout.StackPane;
 
 public class Square extends StackPane {

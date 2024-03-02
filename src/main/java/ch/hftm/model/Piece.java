@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import ch.hftm.Coordinates;
-import ch.hftm.Square;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
