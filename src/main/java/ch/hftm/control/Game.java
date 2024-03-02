@@ -2,6 +2,7 @@ package ch.hftm.control;
 
 import java.util.ArrayList;
 
+import ch.hftm.Board;
 import ch.hftm.Square;
 import ch.hftm.model.EColorPiece;
 import ch.hftm.model.Piece;
@@ -9,8 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class Game {
-    private Piece[][] board;
-    private boolean whiteTurn;
+    public boolean whiteTurn;
 
     public Game() {
         whiteTurn = true;
@@ -21,7 +21,9 @@ public class Game {
     }
 
     public void switchTurn() {
+
         whiteTurn = !whiteTurn;
+        Board.switchPlayerBoarder();
     }
 
     public boolean movePiece(Square sourceSquare, Square destinationSquare, ArrayList<Square> squares) {
@@ -60,7 +62,8 @@ public class Game {
         destinationSquare.setPiece(startPiece);
         destinationSquare.occupied = true;
 
-        startPiece.checkPossibleMoves();
+        startPiece.checkPossibleMoves(squares);
+        sourceSquare.setEffect(null);
         switchTurn();
 
         return true;
@@ -75,4 +78,5 @@ public class Game {
             return false;
         }
     }
+
 }
