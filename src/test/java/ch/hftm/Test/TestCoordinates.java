@@ -1,9 +1,10 @@
-package ch.hftm;
+package ch.hftm.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import ch.hftm.Coordinates;
 
 class TestCoordinates {
 
@@ -11,15 +12,15 @@ class TestCoordinates {
     void testCoordinateConversion() {
         // Test a few sample coordinates
         assertEquals("A1", Coordinates.fromCoordinatesToNotation(0, 0));
-        assertEquals("A2", Coordinates.fromCoordinatesToNotation(1, 0));
-        assertEquals("B1", Coordinates.fromCoordinatesToNotation(0, 1));
+        assertEquals("B1", Coordinates.fromCoordinatesToNotation(1, 0));
+        assertEquals("A2", Coordinates.fromCoordinatesToNotation(0, 1));
         assertEquals("H8", Coordinates.fromCoordinatesToNotation(7, 7));
 
         // Test conversion from notation to coordinates
         assertEquals(0, Coordinates.fromNotationToX("A1"));
         assertEquals(0, Coordinates.fromNotationToY("A1"));
-        assertEquals(1, Coordinates.fromNotationToX("A2"));
-        assertEquals(0, Coordinates.fromNotationToY("A2"));
+        assertEquals(0, Coordinates.fromNotationToX("A2"));
+        assertEquals(1, Coordinates.fromNotationToY("A2"));
     }
 
     @Test

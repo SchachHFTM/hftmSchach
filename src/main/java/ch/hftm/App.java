@@ -2,6 +2,7 @@ package ch.hftm;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.LogManager;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,13 @@ public class App extends Application {
     private static Scene scene;
 
     public static void main(String[] args) {
+        try {
+            // Load the logging configuration from logging.properties
+            LogManager.getLogManager().readConfiguration(App.class.getResourceAsStream("/logging.properties"));
+        } catch (IOException e) {
+            System.err.println("Could not load logging configuration");
+            e.printStackTrace();
+        }
         launch();
     }
 
@@ -29,9 +37,11 @@ public class App extends Application {
 
     static void setSceneRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
-        /*  if (fxml.equals("Game")) {
-           GameController.creatABoard();
-        }*/
+        /*
+         * if (fxml.equals("Game")) {
+         * GameController.creatABoard();
+         * }
+         */
 
     }
 
@@ -50,21 +60,22 @@ public class App extends Application {
         path = f.getAbsolutePath().replace(File.separator, "/");
         path = path.replace("%20", " ");
         System.out.println(path);
-        /* **********Dont Function ********************************
-        
-        // If the path is a file path, convert it to a readable path
-        if (path.endsWith(".jar") || path.endsWith(".class")) {
-            File file = new File(path);
-            path = file.getParent();
-        }
-        
-        // If the Java file does not end with ".class", go two folders up
-        if (path.endsWith(".class")) {
-            File file = new File(path);
-            path = file.getParent();
-            path = file.getParent();
-        }
-        */
+        /*
+         * **********Dont Function ********************************
+         * 
+         * // If the path is a file path, convert it to a readable path
+         * if (path.endsWith(".jar") || path.endsWith(".class")) {
+         * File file = new File(path);
+         * path = file.getParent();
+         * }
+         * 
+         * // If the Java file does not end with ".class", go two folders up
+         * if (path.endsWith(".class")) {
+         * File file = new File(path);
+         * path = file.getParent();
+         * path = file.getParent();
+         * }
+         */
 
         // Return the current file path
         return path;

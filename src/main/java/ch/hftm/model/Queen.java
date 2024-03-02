@@ -45,7 +45,7 @@ public class Queen extends Piece {
                 Square square = getSquareByName(Coordinates.fromCoordinatesToNotation(newX, newY), squares);
                 if (square.occupied) {
                     // If the square is occupied by an opponent's piece, add it to possible moves
-                    if (isOpponentPiece(newX, newY)) {
+                    if (isOpponentPiece(newX, newY, squares)) {
                         possibleMoves.add(square.getName());
                     }
                     // Break the loop because we can't move past an occupied square

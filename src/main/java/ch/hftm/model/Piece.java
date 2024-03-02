@@ -71,27 +71,22 @@ public abstract class Piece extends ImageView implements Serializable {
         return null;
     }
 
-    public Piece getPieceByName(String name) {
-        // TODO: Richtig implementieren
-        // for (Square square : Game.cb.squares) {
-        // if (square.getChildren().size() == 0)
-        // continue;
+    public Piece getPieceByName(String name, ArrayList<Square> squares) {
+        for (Square square : squares) {
+            if (square.getName().equals(name)) {
+                return square.getPiece();
+            }
+        }
 
-        // if (square.name.equals(name))
-        // return (Piece) square.getChildren().get(0);
-
-        // }
-        // return null;
-        Piece test = new Pawn(EColorPiece.BLACK, 1, 1);
-        return test;
+        return null;
     }
 
     public ArrayList<String> checkPossibleMoves(ArrayList<Square> squares) {
         return possibleMoves;
     }
 
-    public boolean isOpponentPiece(int x, int y) {
-        Piece piece = getPieceByName(Coordinates.fromCoordinatesToNotation(x, y));
+    public boolean isOpponentPiece(int x, int y, ArrayList<Square> squares) {
+        Piece piece = getPieceByName(Coordinates.fromCoordinatesToNotation(x, y), squares);
         if (piece != null) {
             return piece.getColor() != this.getColor();
         }

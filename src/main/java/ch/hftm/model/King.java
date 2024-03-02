@@ -60,7 +60,7 @@ public class King extends Piece {
             int newY = y + dy;
 
             Square targetSquare = getSquareByName(Coordinates.convertToNotation(newX, newY), squares);
-            if (targetSquare != null && (isOpponentPiece(newX, newY) || !targetSquare.occupied)) {
+            if (targetSquare != null && (isOpponentPiece(newX, newY, squares) || !targetSquare.occupied)) {
                 possibleMoves.add(targetSquare.getName());
             }
         }

@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import ch.hftm.control.Game;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ public class GameController {
 
     private Board cb;
     private Stage stage;
+    private Game game;
     private String tempPlayerWhite;
     private String tempPlayerBlack;
 
@@ -64,16 +66,18 @@ public class GameController {
     // game.
     @FXML
     public void creatAboard() {
-        Game game = new Game();
+        game = new Game(this);
         cb = new Board(gridPaneBoard, game);
+        game.startGame();
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
 
     }
 
     public void loadABoard(SaveGame saveGame) {
-        Game game = new Game();
+        game = new Game(this);
         cb = new Board(gridPaneBoard, saveGame, game);
+        game.startGame();
         textFieldPlayer1.setText("White Player");
         textFieldPlayer2.setText("Black Player");
     }
@@ -82,8 +86,9 @@ public class GameController {
     // the transferred savegame
     @FXML
     public void loadAboard(SaveGame saveGame) {
-        Game game = new Game();
+        game = new Game(this);
         cb = new Board(gridPaneBoard, saveGame, game);
+        game.startGame();
         newGameButton.setDisable(true);
         restartButten.setDisable(false);
         textFieldPlayer1.setText(cb.currentGame.getPlayerNameWhite());
@@ -230,6 +235,25 @@ public class GameController {
         } catch (NullPointerException e) {
             tempPlayerBlack = playerBlack;
         }
+    }
 
+    public void startTimerThread(boolean isWhiteTurn) {
+        Thread timerThread = new Thread(() -> {
+            int remainingMinutes = isWhiteTurn ? game.whiteRemainingMinutes : game.blackRemainingMinutes;
+            Label timeLabel = isWhiteTurn ? timePlayer1 : timePlayer2;
+
+            while (remainingMinutes > 0) {
+                try {
+                    Thread.sleep(6000);
+                    remainingMinutes--;
+                    String remainingString = String.format("%02d:%02d", remainingMinutes / 60, remainingMinutes % 60);
+                    System.out.println("Remaining Time: " + remainingString);
+                    Platform.runLater(() -> timeLabel.setText(remainingString));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        timerThread.start();
     }
 }

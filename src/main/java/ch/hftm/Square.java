@@ -9,7 +9,7 @@ public class Square extends StackPane {
     public int y;
     public boolean occupied;
 
-    String name;
+    public String name;
 
     private Piece piece;
 

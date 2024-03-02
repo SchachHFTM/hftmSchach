@@ -76,7 +76,7 @@ public class Board extends GridPane {
                 if (x >= 0 && x < 8 && y >= 0 && y < 8) {
                     for (Square square : squares) {
                         if (square.x == x && square.y == y) {
-                            square.setPiece(pi); // Associate the piece with the square
+                            square.setPiece(pi);
                             addPiece(square, pi);
                         }
                     }
@@ -108,6 +108,7 @@ public class Board extends GridPane {
             if ((isWhitePiece && !game.whiteTurn) || (!isWhitePiece && game.whiteTurn)) {
                 return;
             }
+
             ArrayList<String> possibleMoves = piece.checkPossibleMoves(squares);
             for (String move : possibleMoves) {
                 for (Square possibleMove : squares) {
@@ -120,8 +121,6 @@ public class Board extends GridPane {
             selectedPiece = piece;
             selectedSquare = square;
             updateEventHandlers();
-
-        } else {
         }
     }
 
@@ -132,7 +131,6 @@ public class Board extends GridPane {
             ArrayList<String> possibleMoves = selectedPiece.checkPossibleMoves(squares);
             if (possibleMoves.contains(square.getName())) {
                 game.movePiece(selectedSquare, square, squares);
-                selectedPiece.setEffect(null);
                 for (String move : possibleMoves) {
                     for (Square possibleMove : squares) {
                         if (possibleMove.getName().equals(move)) {
@@ -169,7 +167,8 @@ public class Board extends GridPane {
     public static void resetBorderWidth() {
         for (Square square : squares) {
 
-            setBorderWidth(1, square); // Hier 0 setzen, um den Rahmen zu entfernen, oder eine andere Standarddicke verwenden
+            setBorderWidth(1, square); // Hier 0 setzen, um den Rahmen zu entfernen, oder eine andere Standarddicke
+                                       // verwenden
         }
     }
 
